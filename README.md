@@ -61,7 +61,7 @@ python brainfusion.py
 
 | Platform    | Files                                                        | Version | Description                                                  |
 | ----------- | ------------------------------------------------------------ | ------- | ------------------------------------------------------------ |
-| **Windows** | [brainfusion v0.1.0-pre-release](./application/brainfusion v0.1.0-pre-release/readme.md) | 0.1.0   | Versions of functions and basic UI that implement EEG, fNIRS, ECG, EMG preprocessing, feature extraction, statistical analysis, machine learning, and coupling computation |
+| **Windows** | [brainfusion v0.1.0-pre-release](./application/brainfusion_v0.1.0-pre-release/readme.md) | 0.1.0   | Versions of functions and basic UI that implement EEG, fNIRS, ECG, EMG preprocessing, feature extraction, statistical analysis, machine learning, and coupling computation |
 
 ## Contribution & Contact
 Contributions are welcome! Please fork the repository and submit a pull request or raise an issue for discussion. We also provide personalized assistance for all users and respond to research inquiries within 48 hours. (E-mail: brainfusion@163.com)
