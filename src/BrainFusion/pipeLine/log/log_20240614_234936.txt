@@ -1,0 +1,10 @@
+2024-06-14 23:49:12
+[START] Start match files... 
+2024-06-14 23:49:12
+[SUCCESS] Files were matched and no matched files have been removed from list 
+2024-06-14 23:49:19
+[SUCCESS] sub1 is successfully processed and the result is saved in C:/Users/28164/Desktop/test/耦合测试\ncv_results\sub1.zip 
+2024-06-14 23:49:29
+[SUCCESS] sub2 is successfully processed and the result is saved in C:/Users/28164/Desktop/test/耦合测试\ncv_results\sub2.zip 
+2024-06-14 23:49:29
+[FINISH] All files have been processed 
