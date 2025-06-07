@@ -1,4 +1,4 @@
-![BrainFusion](docs/images/logo.png)
+![BrainFusion](resource/images/logo.png)
 # BrainFusion
 **BrainFusion** is an open-source, Python-based platform developed by the Medical Information and Neuroimaging Laboratory (MINILab) at the School of Biomedical Science and Engineering, South China University of Technology (SCUT), which designed to streamline the exploration of brain-body interactions and multimodal Brain-Computer Interfaces (BCI). This platform addresses the growing need for tools that integrate and analyze signals such as EEG, EMG, ECG, and fNIRS in neuroscience and BCI research.
 
@@ -45,7 +45,7 @@ v0.1.1 Add drag-and-drop interface for customized workflow
 
 ```bash
 git clone https://github.com/lwh-scut/BrainFusion.git  
-cd BrainFusion
+cd BrainFusion/src
 ```
 **Install dependencies:**
 
@@ -55,7 +55,7 @@ pip install -r requirements.txt
 **Launch BrainFusion:**
 
 ```bash
-python brainfusion.py  
+python main.py  
 ```
 ### 2. Standalone Packages (For End Users)
 
