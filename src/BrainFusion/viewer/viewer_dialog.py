@@ -22,57 +22,64 @@ from UI.ui_component import BFPushButton
 
 
 class BrainFusionViewer(QWidget):
+    """Main visualization application for BrainFusion data."""
+
     def __init__(self):
+        """
+        Initialize visualization application.
+        """
         super(BrainFusionViewer, self).__init__()
-        # 创建导入数据按钮和显示文件名的 QLineEdit
+        # Create import button and file display
         self.setWindowTitle("BrainFusion Viewer")
         self.setGeometry(800, 600, 1200, 600)
 
+        # Define visualization type mappings
         self.curve_type = ['eeg', 'eeg_preprocess', 'fnirs', 'fnirs_preprocess', 'emg', 'emg_preprocess', 'ecg',
                            'ecg_preprocess']
         self.topomap_type = ['eeg_psd', 'eeg_microstate']
         self.time_frequency_type = ['stft']
 
+        # Create import button
         self.import_button = BFPushButton("Select Folder")
         self.import_button.setFixedWidth(150)
+
+        # Create file display field
         self.file_name_lineedit = QLineEdit()
         self.file_name_lineedit.setFixedWidth(150)
-        self.file_name_lineedit.setReadOnly(True)  # 设置为只读，用户不能手动编辑
+        self.file_name_lineedit.setReadOnly(True)  # Read-only to prevent manual editing
 
-        # 连接按钮的点击事件
+        # Create import group box
         self.groupbox_import = QGroupBox("Data Files")
         import_layout = QVBoxLayout(self.groupbox_import)
         self.import_button.clicked.connect(self.open_folder)
 
-        # 创建布局并添加控件
+        # Add widgets to top layout
         top_layout = QHBoxLayout()
         top_layout.addWidget(self.import_button)
         top_layout.addWidget(self.file_name_lineedit)
 
-        # left_layout.addLayout(top_layout)
-        # 创建列表控件
+        # Create file list widget
         self.listWidget = QListWidget(self)
         self.listWidget.setFixedWidth(300)
-        # 右键菜单支持
+        # Enable context menu
         self.listWidget.setContextMenuPolicy(Qt.CustomContextMenu)
         self.listWidget.customContextMenuRequested.connect(self.show_context_menu)
         self.listWidget.doubleClicked.connect(self.list_item_double_clicked)
 
+        # Build layout structure
         import_layout.addLayout(top_layout)
         import_layout.addWidget(self.listWidget)
-
         self.groupbox_import.setFixedWidth(325)
-
         left_layout = QVBoxLayout()
         left_layout.addWidget(self.groupbox_import)
-        # left_layout.addWidget(self.groupbox_events)
 
-        # 创建frame
+        # Create drawing workspace
         self.drawing_frame = QFrame()
-        self.drawing_frame.setFrameShape(QFrame.StyledPanel)  # 设置 QFrame 的样式
+        self.drawing_frame.setFrameShape(QFrame.StyledPanel)  # Set frame style
         self.drawing_frame.setStyleSheet("background-color: white;")
         self.drawing_layout = QVBoxLayout(self.drawing_frame)
 
+        # Create visualization label
         self.bnt_label = QLabel("Visualisation")
         self.bnt_label.setStyleSheet("font-family: 'Times New Roman'; font-size: 14pt; font-weight: bold;")
         self.bnt_layout = QHBoxLayout()
@@ -80,107 +87,132 @@ class BrainFusionViewer(QWidget):
         self.bnt_layout.addStretch(1)
         self.drawing_layout.addLayout(self.bnt_layout)
 
-        # self.drawing_layout
+        # Create tabbed visualization area
         self.drawing_widget = QTabWidget()
         self.drawing_widget.setTabsClosable(True)
         self.drawing_widget.tabCloseRequested.connect(self.close_tab)
-
         self.drawing_layout.addWidget(self.drawing_widget)
 
-        # 创建主布局并添加之前的布局和控件
+        # Build main layout
         layout = QHBoxLayout(self)
         layout.addLayout(left_layout)
-        # layout.addStretch(1)
-        layout.addWidget(self.drawing_frame)  # 将绘图用的 QFrame 添加到布局中
+        layout.addWidget(self.drawing_frame)  # Add drawing workspace
 
     def show_context_menu(self, position):
         """
-        显示右键菜单，用于选择绘图类型。
+        Display context menu with visualization options for selected file.
+
+        :param position: Click position in the list widget
+        :type position: QPoint
         """
-        # 获取当前选中的项目
+        # Get selected item
         item = self.listWidget.itemAt(position)
         if not item:
             return
-        file_path = item.data(32)  # 获取保存在自定义角色的完整路径
+
+        # Load file data
+        file_path = item.data(32)  # Retrieve stored file path
         data, file_path = read_file_by_qt(self, [file_path])
         name = item.text()
 
-        # 创建右键菜单
+        # Create visualization menu
         menu = QMenu(self)
 
-        # 添加菜单选项
+        # Add visualization actions
         curve_action = QAction("Line Chart", self)
         bar_action = QAction("Bar Chart", self)
         topo_action = QAction("Topographic Map", self)
-        heatmap_action = QAction("热力图", self)
-        network_action = QAction("网络图", self)
         table_action = QAction("Data Table", self)
 
-        # data_type = data['type']
-        # # 根据 data_type 确定哪些按钮可用
-        # if data_type not in ["eeg", "fnirs", "ecg"]:  # 假设这些类型支持曲线图
-        #     curve_action.setEnabled(False)
-        #
-        # if data_type not in ["eeg", "fnirs"]:  # 假设这些类型支持柱状图
-        #     bar_action.setEnabled(False)
-        #
-        # if data_type != "eeg":  # 假设只有 EEG 类型支持地形图
-        #     topo_action.setEnabled(False)
-        #
-        # if data_type not in ["fnirs", "eeg"]:  # 假设这些类型支持热力图
-        #     heatmap_action.setEnabled(False)
-        #
-        # if data_type != "network":  # 假设只有 network 类型支持网络图
-        #     network_action.setEnabled(False)
+        # Connect actions to handlers
+        curve_action.triggered.connect(lambda: self.plot_feature_curve(data, name + '_curve'))
+        bar_action.triggered.connect(lambda: self.plot_bar(data, name + '_bar'))
+        topo_action.triggered.connect(lambda: self.plot_topomap(data, name + '_topo'))
+        table_action.triggered.connect(lambda: self.plot_table(data, name + '_table'))
 
-        # 连接信号到对应的槽函数
-        curve_action.triggered.connect(lambda: self.plot_feature_curve(data, name+'_curve'))
-        bar_action.triggered.connect(lambda: self.plot_bar(data, name+'_bar'))
-        topo_action.triggered.connect(lambda: self.plot_topomap(data, name+'_topo'))
-        heatmap_action.triggered.connect(lambda: self.set_plot_type(item, "热力图"))
-        network_action.triggered.connect(lambda: self.set_plot_type(item, "网络图"))
-        table_action.triggered.connect(lambda: self.plot_table(data, name+'_table'))
-
-        # 将操作添加到菜单
+        # Add actions to menu
         menu.addAction(curve_action)
         menu.addAction(bar_action)
         menu.addAction(topo_action)
-        # menu.addAction(heatmap_action)
-        # menu.addAction(network_action)
         menu.addAction(table_action)
 
-        # 显示菜单
+        # Display menu at position
         menu.exec_(self.listWidget.viewport().mapToGlobal(position))
 
     def set_plot_type(self, item, plot_type):
         """
-        设置列表项的绘图类型。
+        Set visualization type for list item.
+
+        :param item: List widget item
+        :type item: QListWidgetItem
+        :param plot_type: Visualization type to assign
+        :type plot_type: str
         """
         item.setData(Qt.UserRole, plot_type)
         item.setText(f"{item.text()} - {plot_type}")
 
     def plot_bar(self, data, name):
+        """
+        Create bar plot visualization.
+
+        :param data: Input data for visualization
+        :type data: dict
+        :param name: Tab name for visualization
+        :type name: str
+        """
         bar_widget = BarPlotWidget(data, data['ch_names'], data['feature'].keys())
         self.drawing_widget.addTab(bar_widget, name)
         self.drawing_widget.setCurrentWidget(bar_widget)
 
     def plot_feature_curve(self, data, name):
+        """
+        Create feature curve visualization.
+
+        :param data: Input data for visualization
+        :type data: dict
+        :param name: Tab name for visualization
+        :type name: str
+        """
         curve_widget = CurvePlotWidget(data, data['ch_names'], data['feature'].keys())
         self.drawing_widget.addTab(curve_widget, name)
         self.drawing_widget.setCurrentWidget(curve_widget)
 
     def plot_topomap(self, data, name):
+        """
+        Create topographic map visualization.
+
+        :param data: Input data for visualization
+        :type data: dict
+        :param name: Tab name for visualization
+        :type name: str
+        """
         topomap_widget = TopoMapPlotWidget(data, data['ch_names'], data['feature'].keys())
         self.drawing_widget.addTab(topomap_widget, name)
         self.drawing_widget.setCurrentWidget(topomap_widget)
 
     def plot_table(self, data, name):
+        """
+        Create data table visualization.
+
+        :param data: Input data for visualization
+        :type data: dict
+        :param name: Tab name for visualization
+        :type name: str
+        """
         table_widget = TablePlotWidget(data, data['ch_names'], data['feature'].keys())
         self.drawing_widget.addTab(table_widget, name)
         self.drawing_widget.setCurrentWidget(table_widget)
 
     def plot_raw_by_file(self, path=None):
+        """
+        Create raw data curve visualization.
+
+        :param path: File path for visualization
+        :type path: str
+        """
+
         def trans_data(data):
+            """Transform fNIRS data structure for visualization."""
             if data['type'] == 'fnirs_preprocessed':
                 result = data['data'][0]
                 result.extend(data['data'][1])
@@ -190,52 +222,61 @@ class BrainFusionViewer(QWidget):
                 data['ch_names'] = channel
             return data
 
+        # Load and plot data
         data, file_path = read_file_by_qt(self, path)
-        print(data)
         if data:
             data = trans_data(data)
-            # plot_raw(data=data['data'], channel=data['ch_names'])
             self.drawing_widget = RawCurvePlotDialog(data=data, filePath=file_path[0], parent=self)
             self.drawing_widget.plot_data(self.drawing_widget.current_page)
 
     def open_folder(self):
-        # 打开文件夹选择对话框
-        dir_path = QFileDialog.getExistingDirectory(self, "选择文件夹", "")
+        """Open folder selection dialog."""
+        dir_path = QFileDialog.getExistingDirectory(self, "Select Directory", "")
         if dir_path:
             self.list_files(dir_path)
             self.file_name_lineedit.setText(dir_path)
 
     def list_files(self, dir_path):
-        # 列出目录下所有符合条件的文件
-        self.listWidget.clear()  # 清空现有列表项
+        """
+        List supported files in directory.
+
+        :param dir_path: Directory path to scan
+        :type dir_path: str
+        """
+        self.listWidget.clear()  # Clear existing items
+        # Add supported file types
         for filename in os.listdir(dir_path):
             if filename.endswith(('.edf', '.bdf', '.mat', '.nirs', '.ecg', '.xlsx', '.json')):
-                # 创建列表项，仅显示文件名
                 item = QListWidgetItem(filename)
-                item.setData(32, os.path.join(dir_path, filename))  # 使用自定义角色存储完整路径
+                item.setData(32, os.path.join(dir_path, filename))  # Store full path
                 self.listWidget.addItem(item)
 
     def list_item_double_clicked(self, index):
-        # 双击列表项事件
+        """
+        Handle double-click on file item.
+
+        :param index: Index of double-clicked item
+        :type index: QModelIndex
+        """
+        # Get file data
         item = self.listWidget.item(index.row())
-        file_path = item.data(32)  # 获取保存在自定义角色的完整路径
+        file_path = item.data(32)  # Retrieve stored file path
         name = item.text()
 
-        # 检查是否已经存在具有相同名称的Tab页面
+        # Check for existing tab
         for i in range(self.drawing_widget.count()):
             if self.drawing_widget.tabText(i) == name:
-                # 如果Tab页面已存在，跳转到该页面
                 self.drawing_widget.setCurrentIndex(i)
                 return
 
+        # Create visualization
         plot_widget = self.plot_by_file_type(path=[file_path])
         if plot_widget:
             self.drawing_widget.addTab(plot_widget, name)
             self.drawing_widget.setCurrentWidget(plot_widget)
-        # self.clearLayout()
 
     def clearLayout(self):
-        # 清除布局中的所有控件
+        """Clear all widgets from drawing layout."""
         while self.drawing_layout.count():
             item = self.drawing_layout.takeAt(0)
             widget = item.widget()
@@ -243,7 +284,17 @@ class BrainFusionViewer(QWidget):
                 widget.deleteLater()
 
     def plot_by_file_type(self, path):
+        """
+        Create visualization based on file type.
+
+        :param path: File path for visualization
+        :type path: list[str]
+        :return: Visualization widget for data
+        :rtype: QWidget
+        """
+
         def trans_data(data):
+            """Transform fNIRS data structure for visualization."""
             if data['type'] == 'fnirs_preprocessed':
                 result = data['data'][0]
                 result.extend(data['data'][1])
@@ -254,29 +305,27 @@ class BrainFusionViewer(QWidget):
             return data
 
         drawing_widget = None
-        if 'subject_01_MI_statistic_result' in path[0]:
-            drawing_widget = TestBoxPlot()
-        elif 'subject_01_MI_ml_result' in path[0]:
-            drawing_widget = TestMLPlot()
-        elif 'subject_01_MI_eeg_raw' in path[0]:
-            drawing_widget = TestEEGPlot()
-        # elif 'subject_01_MI_fnirs' in path[0]:
-        #     drawing_widget = TestfNIRSSensorPlot()
-        # elif 'subject_01_MI_combine_eeg_fnirs' in path[0]:
-        #     drawing_widget = TestEEGandfNIRSSensorPlot()
-        else:
-            data, file_path = read_file_by_qt(self, path)
+        file_name = os.path.basename(path[0])
 
+        # Handle test data files
+        if 'subject_01_MI_statistic_result' in file_name:
+            drawing_widget = TestBoxPlot()
+        elif 'subject_01_MI_ml_result' in file_name:
+            drawing_widget = TestMLPlot()
+        elif 'subject_01_MI_eeg_raw' in file_name:
+            drawing_widget = TestEEGPlot()
+        else:
+            # Load and process data files
+            data, file_path = read_file_by_qt(self, path)
             if data:
+                # Select visualization based on data type
                 if data['type'] in self.curve_type:
-                    # plot_raw(data=data['data'], channel=data['ch_names'])
-                    if data['type'] == 'fnirs_preprocessed' or data['type'] == 'fnirs':
+                    if data['type'] in ['fnirs_preprocessed', 'fnirs']:
                         data = trans_data(data)
                         drawing_widget = fNIRSPlotDialog(data=data, filePath=file_path[0], parent=self)
                     else:
                         drawing_widget = RawCurvePlotDialog(data=data, filePath=file_path[0], parent=self)
                     drawing_widget.plot_data(drawing_widget.current_page)
-
                 elif data['type'] in self.topomap_type:
                     drawing_widget = TopomapViewer(data=data, parent=self)
                 elif data['type'] in self.time_frequency_type:
@@ -285,8 +334,13 @@ class BrainFusionViewer(QWidget):
         return drawing_widget
 
     def close_tab(self, index):
-        # 关闭Tab页面
-        self.tab_widget.removeTab(index)
+        """
+        Close visualization tab.
+
+        :param index: Tab index to close
+        :type index: int
+        """
+        self.drawing_widget.removeTab(index)
 
 
 if __name__ == '__main__':

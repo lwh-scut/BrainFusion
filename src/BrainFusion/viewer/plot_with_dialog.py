@@ -30,6 +30,17 @@ from PyQt5.QtWidgets import QVBoxLayout, QSizePolicy
 
 
 class RawCurvePlotDialog(QMainWindow):
+    """
+    Dialog for visualizing and annotating raw EEG data signals.
+
+    :param data: EEG data dictionary containing raw signals and metadata
+    :type data: dict
+    :param filePath: Path to the EEG data file
+    :type filePath: str
+    :param parent: Parent widget container
+    :type parent: QWidget, optional
+    """
+
     def __init__(self, data, filePath, parent=None):
         super(RawCurvePlotDialog, self).__init__(parent)
         self.setWindowTitle("Raw Curve Plot Dialog")
@@ -38,33 +49,32 @@ class RawCurvePlotDialog(QMainWindow):
         self.nchan = data['nchan']
         self.srate = data['srate']
         self.ch_names = data['ch_names']
-        self.filePath = self.modify_file_path(filePath)  # 文件路径
-        # 总数据长度
-        self.total_samples = self.data.shape[1]
-        # 当前页数
-        self.current_page = 0
-        # 每页显示数据
-        self.num_time_per_page = 5
+        self.filePath = self.modify_file_path(filePath)  # File path for annotations
+
+        # Data navigation parameters
+        self.total_samples = self.data.shape[1]  # Total data points in EEG recording
+        self.current_page = 0  # Current page index
+        self.num_time_per_page = 5  # Page duration in seconds
         self.num_samples_per_page = int(self.num_time_per_page * self.srate)
 
-        self.sample_interval = 1 / self.srate  # 计算每个数据点之间的时间间隔
-        self.time_values = np.arange(0, self.total_samples) * self.sample_interval  # 生成时间值数组
+        # Time axis parameters
+        self.sample_interval = 1 / self.srate  # Time per sample
+        self.time_values = np.arange(0, self.total_samples) * self.sample_interval  # Time vector
 
         self.central_widget = PlotWidget()
         self.setCentralWidget(self.central_widget)
 
-        # 创建每个通道的 PlotWidget
+        # List for per-channel plot widgets
         self.plot_widgets = []
         for i in range(self.nchan):
             plot_widget = PlotWidget()
             plot_widget.setMinimumHeight(20)
-            plot_widget.setMouseEnabled(x=False, y=False)  # 禁用鼠标操作
+            plot_widget.setMouseEnabled(x=False, y=False)  # Disable mouse interaction
             plot_widget.wheelEvent = self.wheelEvent
-            # plot_widget.getViewBox().installEventFilter(self)  # 安装事件过滤器
-            plot_widget.mousePressEvent = lambda event, idx=i: self.customMousePressEvent(event, idx)  # 绑定鼠标点击事件
+            plot_widget.mousePressEvent = lambda event, idx=i: self.customMousePressEvent(event, idx)
             self.plot_widgets.append(plot_widget)
 
-        # 添加向前和向后翻页的按钮
+        # UI controls
         self.button_prev = QPushButton('Previous')
         self.button_prev.setFixedWidth(200)
         self.button_next = QPushButton('Next')
@@ -74,350 +84,331 @@ class RawCurvePlotDialog(QMainWindow):
 
         self.num_samples_per_page_lineedit = QLineEdit(str(self.num_time_per_page))
         self.num_samples_per_page_lineedit.setFixedWidth(100)
-        self.num_samples_per_page_lineedit.setValidator(QIntValidator())  # 仅允许输入整数
+        self.num_samples_per_page_lineedit.setValidator(QIntValidator())  # Integer input only
         self.num_samples_per_page_lineedit.editingFinished.connect(self.on_samples_per_page_change)
         self.tip_label = QLabel('Sec/Page: ')
         self.tip_label.setFixedWidth(100)
 
+        # Layout configuration
         h_layout = QHBoxLayout()
         h_layout.addWidget(self.button_prev)
         h_layout.addWidget(self.button_next)
         h_layout.addSpacing(200)
         h_layout.addWidget(self.tip_label)
-        h_layout.addWidget(self.num_samples_per_page_lineedit)  # 添加 LineEdit 控件
+        h_layout.addWidget(self.num_samples_per_page_lineedit)
 
+        # Main layout with channel plots
         main_layout = QFormLayout()
         for i, plot_widget in enumerate(self.plot_widgets):
             main_layout.addRow(self.ch_names[i], plot_widget)
             main_layout.setSpacing(0)
         main_layout.addItem(h_layout)
-        self.clicked_x_list = QListWidget()  # 创建 QListWidget 来显示点击过的 x 值
-        self.clicked_x_list.itemDoubleClicked.connect(self.remove_clicked_x)  # 绑定双击删除点击过的 x 值
 
-        # 在布局中添加 QListWidget
+        # Event annotation list
+        self.clicked_x_list = QListWidget()  # Event marker storage
+        self.clicked_x_list.itemDoubleClicked.connect(self.remove_clicked_x)
         main_layout.addWidget(self.clicked_x_list)
 
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
         self.setCentralWidget(central_widget)
-        self.create_file()
 
+        # Initialize annotation file
+        self.create_file()
         self.plot_data(self.current_page)
 
     def modify_file_path(self, filePath):
-        # 去除后缀名，加上 event.tsv
+        """
+        Generate annotation file path from EEG data path.
+
+        :param filePath: Original EEG data file path
+        :type filePath: str
+        :return: Modified annotation file path
+        :rtype: str
+        """
         filename, ext = os.path.splitext(filePath)
         return filename + "_event.tsv"
 
     def create_file(self):
-        # 创建一个.tsv文件
+        """Create annotation file or load existing data."""
         if os.path.exists(self.filePath):
             self.load_data_from_file()
-            print(111)
         else:
             with open(self.filePath, 'w') as f:
                 f.write('')
 
     def save_data_to_file(self):
-        # 将 QListWidget 中的数据保存到文件中
+        """Save event markers to annotation file."""
         with open(self.filePath, 'w') as f:
             for i in range(self.clicked_x_list.count()):
                 item = self.clicked_x_list.item(i)
                 f.write(item.text() + '\n')
 
     def load_data_from_file(self):
-        # 从文件中加载数据到 QListWidget 中
+        """Load existing event markers from annotation file."""
         with open(self.filePath, 'r') as f:
             for line in f:
                 self.clicked_x_list.addItem(line.strip())
 
     def plot_data(self, page):
+        """
+        Render EEG data for the specified page.
+
+        :param page: Page index to display
+        :type page: int
+        """
         start_index = page * self.num_samples_per_page
-        end_index = start_index + self.num_samples_per_page
+        end_index = min(start_index + self.num_samples_per_page, self.total_samples)
 
         for i in range(self.nchan):
             plot_widget = self.plot_widgets[i]
             plot_widget.clear()
-            plot_widget.setBackground('w')  # 设置背景为白色
+            plot_widget.setBackground('w')  # White background
 
-            # 绘制数据
+            # Plot EEG signal
             plot_widget.plot(self.time_values[start_index:end_index],
                              self.data[i, start_index:end_index], pen='k')
-            # 设置 y 轴标签
-            # plot_widget.setLabel('left', self.data['ch_names'][i], units='V')
-            # 隐藏 y 轴刻度数值
-            plot_widget.getAxis('left').setStyle(showValues=False)
+            plot_widget.getAxis('left').setStyle(showValues=False)  # Hide y-axis labels
 
-            # 隐藏 x 轴
+            # Configure axes visibility
             if i < self.nchan - 1:
                 plot_widget.getAxis('bottom').setStyle(showValues=False)
-                plot_widget.getAxis('bottom').setPen(None)
             else:
-                plot_widget.getAxis('bottom').setStyle(showValues=True)
-            plot_widget.getAxis('left').setPen(None)
+                plot_widget.getAxis('bottom').setStyle(showValues=True)  # Show x-axis on last channel
+
+        # Draw event markers
         self.draw_green_line()
         self.draw_yellow_line()
 
     def on_prev_click(self):
+        """Navigate to the previous data page."""
         self.current_page = max(self.current_page - 1, 0)
         self.plot_data(self.current_page)
 
     def on_next_click(self):
+        """Navigate to the next data page."""
         max_pages = self.total_samples // self.num_samples_per_page
         self.current_page = min(self.current_page + 1, max_pages)
         self.plot_data(self.current_page)
 
     def on_samples_per_page_change(self):
-        self.num_time_per_page = int(self.num_samples_per_page_lineedit.text())
-        if self.num_time_per_page > 0:
-            self.num_samples_per_page = int(self.num_time_per_page * self.srate)
-            self.plot_data(self.current_page)
-        else:
-            # 如果输入的值不合法，恢复原始值
-            self.num_samples_per_page_lineedit.setText(str(self.num_time_per_page))
+        """Handle page duration configuration change."""
+        try:
+            new_value = int(self.num_samples_per_page_lineedit.text())
+            if new_value > 0:
+                self.num_time_per_page = new_value
+                self.num_samples_per_page = int(new_value * self.srate)
+                self.plot_data(self.current_page)
+                return
+        except ValueError:
+            pass
+        # Reset to previous valid value on invalid input
+        self.num_samples_per_page_lineedit.setText(str(self.num_time_per_page))
 
     def wheelEvent(self, event):
+        """Handle mouse wheel scrolling for vertical zoom."""
         delta = event.angleDelta().y() / 120
-        if delta > 0:  # 向上滚动
-            for plot_widget in self.plot_widgets:
-                ylim = plot_widget.getViewBox().viewRange()[1]
-                new_ylim = [ylim[0] * 0.8, ylim[1] * 0.8]
-                plot_widget.setYRange(*new_ylim, padding=0)
-        elif delta < 0:  # 向下滚动
-            for plot_widget in self.plot_widgets:
-                ylim = plot_widget.getViewBox().viewRange()[1]
-                new_ylim = [ylim[0] * 1.2, ylim[1] * 1.2]
-                plot_widget.setYRange(*new_ylim, padding=0)
+        zoom_factor = 0.8 if delta > 0 else 1.2  # Zoom in/out factor
+
+        for plot_widget in self.plot_widgets:
+            ymin, ymax = plot_widget.getViewBox().viewRange()[1]
+            plot_widget.setYRange(ymin * zoom_factor, ymax * zoom_factor, padding=0)
 
     def customMousePressEvent(self, event, idx):
+        """
+        Handle mouse click events on EEG plots.
+
+        :param event: Mouse event object
+        :type event: QMouseEvent
+        :param idx: Index of the channel plot
+        :type idx: int
+        """
         if event.button() == Qt.LeftButton:
-            # 左键点击事件
-            pos = event.pos()
-            x = self.plot_widgets[idx].plotItem.vb.mapSceneToView(pos).x()
-            self.add_start_x(x)  # 添加 Start:x 到 QListWidget 中
-            self.draw_green_line()  # 绘制绿色直线
+            # Left-click adds start marker
+            x = self.plot_widgets[idx].plotItem.vb.mapSceneToView(event.pos()).x()
+            self.add_start_x(x)
+            self.draw_green_line()
         elif event.button() == Qt.RightButton:
-            # 右键点击事件
-            pos = event.pos()
-            x = self.plot_widgets[idx].plotItem.vb.mapSceneToView(pos).x()
-            self.add_end_x(x)  # 添加 End:x 到 QListWidget 中
-            self.draw_yellow_line()  # 绘制黄色直线
+            # Right-click adds end marker
+            x = self.plot_widgets[idx].plotItem.vb.mapSceneToView(event.pos()).x()
+            self.add_end_x(x)
+            self.draw_yellow_line()
 
     def add_start_x(self, x):
-        item = QListWidgetItem("Start:{}".format(x))  # 创建一个 QListWidgetItem 来显示 Start:x
-        self.clicked_x_list.addItem(item)  # 将 QListWidgetItem 添加到 QListWidget 中
-        self.save_data_to_file()  # 保存数据到文件
+        """
+        Add start marker at specified time position.
+
+        :param x: Time position for marker
+        :type x: float
+        """
+        item = QListWidgetItem(f"Start:{x}")
+        self.clicked_x_list.addItem(item)
+        self.save_data_to_file()
 
     def add_end_x(self, x):
-        item = QListWidgetItem("End:{}".format(x))  # 创建一个 QListWidgetItem 来显示 End:x
-        self.clicked_x_list.addItem(item)  # 将 QListWidgetItem 添加到 QListWidget 中
-        self.save_data_to_file()  # 保存数据到文件
+        """
+        Add end marker at specified time position.
+
+        :param x: Time position for marker
+        :type x: float
+        """
+        item = QListWidgetItem(f"End:{x}")
+        self.clicked_x_list.addItem(item)
+        self.save_data_to_file()
 
     def draw_green_line(self):
-        # 绘制绿色直线
+        """Draw green vertical lines for start markers."""
         for x_item in self.clicked_x_list.findItems("Start:", Qt.MatchStartsWith):
             x = float(x_item.text().split(":")[1])
             for plot_widget in self.plot_widgets:
-                page_start_time = self.current_page * self.num_time_per_page
-                page_end_time = (self.current_page + 1) * self.num_time_per_page
-                if page_start_time <= x <= page_end_time:
+                current_range = (self.current_page * self.num_time_per_page,
+                                 (self.current_page + 1) * self.num_time_per_page)
+                if current_range[0] <= x <= current_range[1]:
                     plot_widget.addItem(InfiniteLine(pos=(x, 0), angle=90, pen=mkPen('g', width=2)))
 
     def draw_yellow_line(self):
-        # 绘制黄色直线
+        """Draw yellow vertical lines for end markers."""
         for x_item in self.clicked_x_list.findItems("End:", Qt.MatchStartsWith):
             x = float(x_item.text().split(":")[1])
             for plot_widget in self.plot_widgets:
-                page_start_time = self.current_page * self.num_time_per_page
-                page_end_time = (self.current_page + 1) * self.num_time_per_page
-                if page_start_time <= x <= page_end_time:
+                current_range = (self.current_page * self.num_time_per_page,
+                                 (self.current_page + 1) * self.num_time_per_page)
+                if current_range[0] <= x <= current_range[1]:
                     plot_widget.addItem(InfiniteLine(pos=(x, 0), angle=90, pen=mkPen('y', width=2)))
 
-    def add_clicked_x(self, x):
-        item = QListWidgetItem(str(x))  # 创建一个 QListWidgetItem 来显示 x 值
-        self.clicked_x_list.addItem(item)  # 将 QListWidgetItem 添加到 QListWidget 中
-
     def remove_clicked_x(self, item):
-        self.clicked_x_list.takeItem(self.clicked_x_list.row(item))  # 删除选定的 x 值
+        """
+        Remove event marker when double-clicked.
+
+        :param item: Event marker item to remove
+        :type item: QListWidgetItem
+        """
+        self.clicked_x_list.takeItem(self.clicked_x_list.row(item))
         self.plot_data(self.current_page)
 
 
-# class RawCurvePlotDialog(QDialog):
-#     def __init__(self, data, parent=None):
-#         super(RawCurvePlotDialog, self).__init__(parent)
-#         self.setWindowTitle("Raw Curve Plot Dialog")
-#         self.setGeometry(100, 100, 800, 600)
-#         self.data = data
-#         # 总数据长度
-#         self.total_samples = np.array(self.data['data']).shape[1]
-#         # 当前页数
-#         self.current_page = 0
-#         # 每页显示数据
-#         self.num_time_per_page = 5
-#         self.num_samples_per_page = int(self.num_time_per_page * self.data['srate'])
-#         # 创建Matplotlib图形
-#         self.fig, self.axes = plt.subplots(self.data['nchan'], 1, figsize=(8, 6), sharex=True, sharey=False)
-#
-#         self.sample_interval = 1 / self.data['srate']  # 计算每个数据点之间的时间间隔
-#         self.time_values = np.arange(0, self.total_samples) * self.sample_interval  # 生成时间值数组
-#         self.plot_data(self.current_page)
-#         # 添加时间轴
-#         self.fig.subplots_adjust(hspace=0, wspace=0, bottom=0.08, left=0.05, top=0.98, right=0.98)  # 去除子图间的垂直间隙
-#
-#         self.fig.canvas.mpl_connect('scroll_event', self.on_scroll)
-#
-#         # 创建Matplotlib画布
-#         self.canvas = FigureCanvas(self.fig)
-#         self.canvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-#
-#         self.num_samples_per_page_lineedit = QLineEdit(str(self.num_time_per_page))
-#         self.num_samples_per_page_lineedit.setFixedWidth(100)
-#         self.num_samples_per_page_lineedit.setValidator(QIntValidator())  # 仅允许输入整数
-#         self.num_samples_per_page_lineedit.editingFinished.connect(self.on_samples_per_page_change)
-#         self.tip_label = QLabel('Sec/Page: ')
-#         self.tip_label.setFixedWidth(100)
-#
-#         # 创建布局并添加组件
-#         layout = QVBoxLayout()
-#         layout.addWidget(self.canvas)
-#         # 添加向前和向后翻页的按钮
-#         self.button_prev = QPushButton('Previous')
-#         self.button_prev.setFixedWidth(200)
-#         self.button_next = QPushButton('Next')
-#         self.button_next.setFixedWidth(200)
-#         self.button_prev.clicked.connect(self.on_prev_click)
-#         self.button_next.clicked.connect(self.on_next_click)
-#
-#         h_layout = QHBoxLayout()
-#         h_layout.addWidget(self.button_prev)
-#         h_layout.addWidget(self.button_next)
-#         h_layout.addSpacing(200)
-#         h_layout.addWidget(self.tip_label)
-#         h_layout.addWidget(self.num_samples_per_page_lineedit)  # 添加 LineEdit 控件
-#         layout.addLayout(h_layout)
-#
-#         self.setLayout(layout)
-#
-#     def plot_data(self, page):
-#         start_index = page * self.num_samples_per_page
-#         end_index = start_index + self.num_samples_per_page
-#         for i in range(self.data['nchan']):
-#             self.axes[i].clear()
-#             self.axes[i].plot(self.time_values[start_index:end_index],
-#                               np.array(self.data['data'])[i, start_index:end_index], color='black', linewidth=0.5)
-#             self.axes[i].set_ylabel(self.data['ch_names'][i], rotation=0, ha='right')
-#             self.axes[i].tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False,
-#                                      left=False,
-#                                      right=False, labelleft=False)
-#             self.axes[i].spines['top'].set_color('lightgrey')
-#             self.axes[i].spines['bottom'].set_color('lightgrey')
-#             self.axes[i].spines['right'].set_color('lightgrey')
-#             self.axes[i].spines['left'].set_color('lightgrey')
-#         # 设置 x 轴刻度
-#         self.axes[-1].tick_params(axis='both', which='both', bottom=True, top=False, left=False, right=False,
-#                                   labelbottom=True)
-#         self.axes[-1].set_xlabel('Time (s)')  # 设置 x 轴标签
-#         self.axes[-1].set_xlim(left=self.time_values[start_index],
-#                                right=self.time_values[end_index - 1])  # 设置 x 轴范围
-#
-#     def on_scroll(self, event):
-#         if event.button == 'up':
-#             for ax in self.axes:
-#                 ax.set_ylim(ax.get_ylim()[0] * 0.8, ax.get_ylim()[1] * 0.8)
-#         elif event.button == 'down':
-#             for ax in self.axes:
-#                 ax.set_ylim(ax.get_ylim()[0] * 1.2, ax.get_ylim()[1] * 1.2)
-#         self.canvas.draw_idle()
-#
-#     def on_prev_click(self):
-#         self.current_page = max(self.current_page - 1, 0)
-#         self.plot_data(self.current_page)
-#         self.canvas.draw()
-#
-#     def on_next_click(self):
-#         max_pages = self.total_samples // self.num_samples_per_page
-#         self.current_page = min(self.current_page + 1, max_pages)
-#         self.plot_data(self.current_page)
-#         self.canvas.draw()
-#
-#     def trans_fnirs_data(self):
-#         if self.data['type'] == 'fnirs_preprocessed':
-#             result = self.data['data'][0]
-#             result.extend(self.data['data'][1])
-#             channel = self.data['ch_names'][0]
-#             channel.extend(self.data['ch_names'][1])
-#             self.data['data'] = result
-#             self.data['ch_names'] = channel
-#
-#     def on_samples_per_page_change(self):
-#         new_samples_per_page = int(self.num_samples_per_page_lineedit.text())
-#         if new_samples_per_page > 0:
-#             self.num_samples_per_page = int(new_samples_per_page * self.data['srate'])
-#             self.plot_data(self.current_page)
-#             self.canvas.draw()
-#         else:
-#             # 如果输入的值不合法，恢复原始值
-#             self.num_samples_per_page_lineedit.setText(str(self.num_samples_per_page))
-
-
 class EEGPSDPlotDialog(QDialog):
+    """
+    Dialog for visualizing EEG power spectral density (PSD) topography.
+
+    :param data: EEG power data dictionary
+    :type data: dict
+    :param parent: Parent widget container
+    :type parent: QWidget, optional
+    """
+
     def __init__(self, data, parent=None):
         super(EEGPSDPlotDialog, self).__init__(parent)
         self.setWindowTitle("EEG Topomap Plot Dialog")
         self.setGeometry(100, 100, 1000, 400)
         self.data = data
         self.is_relative = True
-        # 创建Matplotlib图形
+
+        # Create Matplotlib figure
         num_fig = np.array(self.data['data']).shape[1]
         self.fig, self.axes = plt.subplots(1, num_fig, figsize=(8, 6), sharex=True, sharey=True)
-        self.fig.subplots_adjust(hspace=0, wspace=0.05, bottom=0.08, left=0.05, top=0.98, right=0.98)  # 去除子图间的垂直间隙
-        # 创建Matplotlib画布
+
+        # Adjust subplot spacing
+        self.fig.subplots_adjust(hspace=0, wspace=0.05, bottom=0.08, left=0.05, top=0.98, right=0.98)
+
+        # Create Matplotlib canvas
         self.canvas = FigureCanvas(self.fig)
         self.canvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        # 创建布局并添加组件
+
+        # Setup UI layout
         layout = QVBoxLayout(self)
         layout.addWidget(self.canvas)
+
+        # Add relative/absolute toggle
         self.relative_checkbox = QCheckBox('Relative')
         self.relative_checkbox.setChecked(True)
         self.relative_checkbox.stateChanged.connect(self.choose_show_type)
         layout.addWidget(self.relative_checkbox)
+
+        # Render initial visualization
         self.plot(type=self.data['type'])
 
     def choose_show_type(self):
+        """
+        Toggle between relative and absolute power visualization.
+        """
         self.is_relative = self.relative_checkbox.isChecked()
         self.plot(type=self.data['type'])
 
     def plot(self, type='eeg_psd'):
+        """
+        Render EEG power topographic maps.
+
+        :param type: Visualization type ('eeg_psd' for power, 'eeg_microstate' for microstates)
+        :type type: str
+        """
         title_list = None
+        figure_title = ""
+
+        # Configure titles based on visualization type
         if type == 'eeg_psd':
             title_list = ['Δ wave band', 'θ wave band', 'α wave band', 'β wave band', 'γ wave band']
-            self.fig.suptitle("EEG Power Spectral Density")
+            figure_title = "EEG Power Spectral Density"
         elif type == 'eeg_microstate':
             title_list = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
-            self.fig.suptitle("EEG Microstate")
+            figure_title = "EEG Microstate"
+
+        self.fig.suptitle(figure_title)
+
+        # Only plot if we have data
         if self.data:
-            # self.fig.subplots_adjust(top=1, bottom=0, left=0, right=1, hspace=0, wspace=0)
+            # Create EEG sensor layout
             montage = mne.channels.make_standard_montage('standard_1020')
-            info = mne.create_info(ch_names=self.data['ch_names'], sfreq=self.data['srate'], ch_types='eeg')
+            info = mne.create_info(
+                ch_names=self.data['ch_names'],
+                sfreq=self.data['srate'],
+                ch_types=['eeg'] * len(self.data['ch_names']))
+
+            # Normalize data based on display type
             if self.is_relative:
                 norm_data = min_max_scaling_to_range(np.array(self.data['data']).T)
                 data_range = (-1, 1)
             else:
                 norm_data = min_max_scaling_by_arrays(np.array(self.data['data']).T)
                 data_range = (-1, 1)
+
+            # Generate topographic maps
             for i, psd in enumerate(norm_data):
-                evoked = mne.EvokedArray(data=np.array(self.data['data']), info=info)
-                evoked.set_montage(montage)
-                self.axes[i].clear()
-                if title_list:
-                    self.axes[i].set_title(title_list[i])
-                mne.viz.plot_topomap(psd, evoked.info,
-                                     axes=self.axes[i], show=False
-                                     , sensors=True, vlim=data_range)
-                self.axes[i].figure.canvas.draw()
+                evoked = mne.EvokedArray(
+                    data=np.array(self.data['data']),
+                    info=info)
+            evoked.set_montage(montage)
+
+            # Configure axes
+            self.axes[i].clear()
+            if title_list:
+                self.axes[i].set_title(title_list[i])
+
+            # Plot topographic map
+            mne.viz.plot_topomap(
+                psd,
+                evoked.info,
+                axes=self.axes[i],
+                show=False,
+                sensors=True,
+                vlim=data_range
+            )
+            self.axes[i].figure.canvas.draw()
 
 
 def min_max_scaling_to_range(array, new_min=-1, new_max=1):
+    """
+    Normalize array values to specified range using min-max scaling.
+
+    :param array: Input data array
+    :type array: numpy.ndarray
+    :param new_min: Minimum value of output range
+    :type new_min: float
+    :param new_max: Maximum value of output range
+    :type new_max: float
+    :return: Normalized array
+    :rtype: numpy.ndarray
+    """
     min_val = np.min(array)
     max_val = np.max(array)
     normalized_array = new_min + (new_max - new_min) * (array - min_val) / (max_val - min_val)
@@ -425,6 +416,18 @@ def min_max_scaling_to_range(array, new_min=-1, new_max=1):
 
 
 def min_max_scaling_by_arrays(arrays, new_min=-1, new_max=1):
+    """
+    Normalize multiple arrays to specified range using min-max scaling.
+
+    :param arrays: Sequence of input arrays
+    :type arrays: list of numpy.ndarray
+    :param new_min: Minimum value of output range
+    :type new_min: float
+    :param new_max: Maximum value of output range
+    :type new_max: float
+    :return: List of normalized arrays
+    :rtype: list of numpy.ndarray
+    """
     normalized_arrays = []
     for array in arrays:
         normalized_array = min_max_scaling_to_range(array, new_min, new_max)
@@ -433,7 +436,17 @@ def min_max_scaling_by_arrays(arrays, new_min=-1, new_max=1):
 
 
 def plot_raw_by_file(widget, path=None):
-    def trans_data(data):
+    """
+    Open raw EEG visualization dialog from file selector.
+
+    :param widget: Parent widget for file dialog
+    :type widget: QWidget
+    :param path: Optional file path to bypass dialog
+    :type path: str, optional
+    """
+
+    def transform_data(data):
+        """Reformat fNIRS preprocessing data for visualization."""
         if data['type'] == 'fnirs_preprocessed':
             result = data['data'][0]
             result.extend(data['data'][1])
@@ -446,108 +459,159 @@ def plot_raw_by_file(widget, path=None):
     data, path = read_file_by_qt(widget, path)
 
     if data:
-        data = trans_data(data)
-        # plot_raw(data=data['data'], channel=data['ch_names'])
-        raw_curve_dialog = RawCurvePlotDialog(data=data, filePath=path[0], parent=widget)
-        raw_curve_dialog.show()
+        data = transform_data(data)
+        dialog = RawCurvePlotDialog(data=data, filePath=path[0], parent=widget)
+        dialog.show()
 
 
 def plot_eeg_psd_by_file(widget, path=None):
+    """
+    Open PSD visualization dialog from file selector.
+
+    :param widget: Parent widget for file dialog
+    :type widget: QWidget
+    :param path: Optional file path to bypass dialog
+    :type path: str, optional
+    """
     data = None
     if path is None:
-        # 打开文件对话框，支持选择多个文件
+        # Open file dialog with supported formats
         options = QFileDialog.Options()
         options |= QFileDialog.ReadOnly
 
         try:
-            # select bdf or edf file
-            path, _ = QFileDialog.getOpenFileNames(widget, 'Open Files', '',
-                                                   'All Files (*);;Two Bdf Files (*.bdf);;Edf '
-                                                   'File (*.edf);;Text File (*.txt);;Json '
-                                                   'File(*.json);;Mat File(*.mat)',
-                                                   options=options)
+            path, _ = QFileDialog.getOpenFileNames(
+                widget,
+                'Open EEG Files',
+                '',
+                ('All Files (*);;'
+                 'BDF Files (*.bdf);;'
+                 'EDF Files (*.edf);;'
+                 'Text Files (*.txt);;'
+                 'JSON Files (*.json);;'
+                 'MAT Files (*.mat)'),
+                options=options
+            )
         except Exception as e:
             print(e)
-        if len(path) == 1:
-            file_type = path[0].split('.')[-1]
-            if file_type == 'edf':
-                data = read_edf(path[0])
-            elif file_type == 'csv':
-                data = read_csv(path[0])
-            elif file_type == 'txt':
-                data = read_txt(path[0])
-            elif file_type == 'json':
-                data = read_json(path[0])
-            elif file_type == 'mat':
-                data = read_mat(path[0])
-        elif len(path) == 2:
-            if path[0].split('.')[-1] == 'bdf':
-                data = read_neuracle_bdf(path, is_data_transform=True)
+
+        # Process selected files
+        if path:
+            if len(path) == 1:
+                file_type = path[0].split('.')[-1].lower()
+                if file_type == 'edf':
+                    data = read_edf(path[0])
+                elif file_type == 'csv':
+                    data = read_csv(path[0])
+                elif file_type == 'txt':
+                    data = read_txt(path[0])
+                elif file_type == 'json':
+                    data = read_json(path[0])
+                elif file_type == 'mat':
+                    data = read_mat(path[0])
+            elif len(path) == 2:
+                # Handle Neuracle dual-BDF format
+                if path[0].split('.')[-1].lower() == 'bdf':
+                    data = read_neuracle_bdf(path, is_data_transform=True)
+
+        # Launch dialog if we have data
         if data:
-            eeg_psd_dialog = EEGPSDPlotDialog(data=data, parent=widget)
-            eeg_psd_dialog.show()
+            dialog = EEGPSDPlotDialog(data=data, parent=widget)
+            dialog.show()
 
 
 def plot_raw(data, channel=None, sharey=False, line_color='black', linewidth=0.5):
-    # 判断数据类型
+    """
+    Visualize raw EEG time series using matplotlib.
+
+    :param data: EEG time series data
+    :type data: numpy.ndarray or list
+    :param channel: List of channel names
+    :type channel: list[str], optional
+    :param sharey: Share Y-axis across channels
+    :type sharey: bool
+    :param line_color: Color of EEG traces
+    :type line_color: str
+    :param linewidth: Width of EEG traces
+    :type linewidth: float
+    """
+    # Determine data dimensions
     if isinstance(data, np.ndarray):
-        # 获取数据维度
         dimensions = data.ndim
     elif isinstance(data, list):
-        # 获取数据维度
         dimensions = len(np.array(data).shape)
     else:
         print("Unsupported data type.")
-        return None
+        return
+
+    # Single channel visualization
     if dimensions == 1:
         length = np.array(data).shape[0]
         num_channels = 1
         if channel is None:
             channel = ['channel']
+
         fig, axes = plt.subplots(num_channels, 1, figsize=(10, 6), sharex=True, sharey=sharey)
         axes.plot(data, color=line_color, linewidth=linewidth)
         axes.set_ylabel(f' {channel[0]}', rotation=0, ha='right')
-        axes.tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False, left=False,
-                         right=False,
-                         labelleft=False)
-        axes.spines['top'].set_color('lightgrey')  # 设置坐标轴边框颜色
-        axes.spines['bottom'].set_color('lightgrey')
-        axes.spines['right'].set_color('lightgrey')
-        axes.spines['left'].set_color('lightgrey')
-        # 调整曲线的起点离y轴的距离
+        axes.tick_params(
+            axis='both', which='both',
+            bottom=False, top=False,
+            labelbottom=False, left=False,
+            right=False, labelleft=False
+        )
+
+        # Format axis appearance
+        for spine in axes.spines.values():
+            spine.set_color('lightgrey')
+
+        # Set x-axis limits with padding
         axes.set_xlim(left=-10, right=length)
-        fig.subplots_adjust(hspace=0, wspace=0, bottom=0.02, left=0.1, top=0.98, right=0.98)  # 去除子图间的垂直间隙
+        fig.subplots_adjust(hspace=0, wspace=0, bottom=0.02, left=0.1, top=0.98, right=0.98)
         plt.show()
 
+    # Multi-channel visualization
     elif dimensions == 2:
         data = np.array(data)
         length = data.shape[1]
         num_channels = data.shape[0]
         if channel is None:
-            channel = [str(i) for i in range(1, num_channels + 1)]
+            channel = [f'Channel {i + 1}' for i in range(num_channels)]
+
         fig, axes = plt.subplots(num_channels, 1, figsize=(10, 6), sharex=True, sharey=sharey)
-        for i in range(num_channels):
-            axes[i].plot(data[i, :30000], color=line_color, linewidth=linewidth)
-            axes[i].set_ylabel(f' {channel[i]}', rotation=0, ha='right')
-            axes[i].tick_params(axis='both', which='both', bottom=False, top=False, labelbottom=False, left=False,
-                                right=False,
-                                labelleft=False)
-            axes[i].spines['top'].set_color('lightgrey')  # 设置坐标轴边框颜色
-            axes[i].spines['bottom'].set_color('lightgrey')
-            axes[i].spines['right'].set_color('lightgrey')
-            axes[i].spines['left'].set_color('lightgrey')
-            # 调整曲线的起点离y轴的距离
-            axes[i].set_xlim(left=-10)
-        # 添加时间轴
-        # 生成时间轴数据
-        axes[-1].tick_params(axis='both', which='both', bottom=True, top=False, left=False, right=False,
-                             labelbottom=True)
-        axes[-1].spines['top'].set_color('lightgrey')
-        axes[-1].spines['bottom'].set_color('lightgrey')
-        axes[-1].spines['right'].set_color('lightgrey')
-        axes[-1].spines['left'].set_color('lightgrey')
-        fig.subplots_adjust(hspace=0, wspace=0, bottom=0.05, left=0.05, top=0.98, right=0.98)  # 去除子图间的垂直间隙
+
+        # Plot each channel
+        for i, ax in enumerate(axes):
+            ax.plot(data[i, :30000], color=line_color, linewidth=linewidth)
+            ax.set_ylabel(f' {channel[i]}', rotation=0, ha='right')
+            ax.tick_params(
+                axis='both', which='both',
+                bottom=False, top=False,
+                labelbottom=False, left=False,
+                right=False, labelleft=False
+            )
+
+            # Format axis appearance
+            for spine in ax.spines.values():
+                spine.set_color('lightgrey')
+
+            # Set x-axis limit with left padding
+            ax.set_xlim(left=-10)
+
+        # Configure bottom axis
+        axes[-1].tick_params(
+            axis='both', which='both',
+            bottom=True, top=False,
+            left=False, right=False,
+            labelbottom=True
+        )
+        for spine in axes[-1].spines.values():
+            spine.set_color('lightgrey')
+
+        # Adjust overall figure layout
+        fig.subplots_adjust(hspace=0, wspace=0, bottom=0.05, left=0.05, top=0.98, right=0.98)
         plt.show()
+
+    # Unsupported data format
     else:
-        print(f"Data has {dimensions} dimensions.Not support.")
-        return None
+        print(f"Unsupported data dimension: {dimensions}")

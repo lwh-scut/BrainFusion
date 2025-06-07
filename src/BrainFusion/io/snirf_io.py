@@ -23,9 +23,6 @@ def create_snirf_file(filename, format_version='1.0', metadata=None, data_time_s
     """
     Create a SNIRF-compliant HDF5 file
 
-    Generates a standardized SNIRF file with configurable parameters for
-    functional near-infrared spectroscopy (fNIRS) data storage.
-
     :param filename: Output HDF5 file path
     :type filename: str
     :param format_version: SNIRF format version
@@ -225,9 +222,6 @@ def create_snirf_file(filename, format_version='1.0', metadata=None, data_time_s
 def read_snirf_file(filename):
     """
     Read and parse a SNIRF file
-
-    Extracts all relevant data from a SNIRF-compliant HDF5 file and
-    returns it in a structured dictionary format.
 
     :param filename: Path to SNIRF file
     :type filename: str

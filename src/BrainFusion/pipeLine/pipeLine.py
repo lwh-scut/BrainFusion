@@ -30,19 +30,8 @@ from BrainFusion.utils.channels import convert_ndarray_to_list
 def eeg_power_spectral_density(data, is_save, save_path=None, save_filestyle='csv'):
     """
     Calculate Power Spectral Density (PSD) and extract band powers
-    Computes the power in standard EEG frequency bands:
-    - Delta (0.5-4 Hz)
-    - Theta (4-8 Hz)
-    - Alpha (8-13 Hz)
-    - Beta (13-30 Hz)
-    - Gamma (31-40 Hz)
 
-    :param data: EEG data dictionary with keys:
-        - 'data': EEG signal data, numpy array
-        - 'srate': Sampling rate
-        - 'ch_names': List of channel names
-        - 'events': Event information (optional)
-        - 'montage': Montage layout
+    :param data: EEG data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -96,11 +85,7 @@ def power_spectral_density(data, selected_band, is_save, save_path=None, save_fi
     """
     Calculate custom power spectral density for selected bands
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'srate': Sampling rate
-        - 'ch_names': List of channel names
-        - 'montage': Montage layout
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param selected_band: List of frequency bands to analyze
     :type selected_band: list
@@ -154,12 +139,7 @@ def sample_entropy(data, is_save, save_path=None, save_filestyle='mat'):
     """
     Calculate Sample Entropy of the signal
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'srate': Sampling rate
-        - 'ch_names': List of channel names
-        - 'events': Event information (optional)
-        - 'montage': Montage layout
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -230,9 +210,7 @@ def eeg_multiscale_entropy(data, is_save, scale_factor=1, save_path=None, save_f
     """
     Calculate Multiscale Entropy for EEG signals
 
-    :param data: EEG data dictionary with keys:
-        - 'data': EEG signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: EEG data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -268,11 +246,7 @@ def eeg_microstate(data, n_clusters=4, peak_threshold=None, is_show=True, is_sav
     """
     Perform EEG microstate analysis using GFP peaks
 
-    :param data: EEG data dictionary with keys:
-        - 'data': EEG signal data, numpy array
-        - 'srate': Sampling rate
-        - 'ch_names': List of channel names
-        - 'montage': Montage layout
+    :param data: EEG data dictionary with keys
     :type data: dict
     :param n_clusters: Number of microstate classes
     :type n_clusters: int
@@ -397,9 +371,7 @@ def root_mean_square(data, is_save, is_sliding=False, window_size=None, overlap_
     """
     Calculate Root Mean Square (RMS) value
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -436,9 +408,7 @@ def variance(data, is_save, is_sliding=False, window_size=None, overlap_rate=0, 
     """
     Calculate signal variance
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -475,9 +445,7 @@ def mean_absolute_value(data, is_save, is_sliding=False, window_size=None, overl
     """
     Calculate Mean Absolute Value (MAV)
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -514,9 +482,7 @@ def zero_crossing(data, is_save, is_sliding=False, window_size=None, overlap_rat
     """
     Calculate Zero Crossing Rate (ZCR)
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -566,9 +532,7 @@ def wavelet_transform(data, level, basis_function='db1', is_save=False, save_pat
     """
     Perform Discrete Wavelet Transform (DWT) on signal data. Applies wavelet decomposition to each channel and returns the coefficients
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param level: Decomposition level
     :type level: int
@@ -613,9 +577,7 @@ def wavelet_packet_energy(data, level, basis_function='db1', mode='symmetric', i
     """
     Calculate wavelet packet energy for signal data
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param level: Decomposition level
     :type level: int
@@ -660,10 +622,7 @@ def continuous_wavelet_transform(data, widths=np.arange(1, 50), basis_function='
     """
     Compute Continuous Wavelet Transform (CWT) for signal data
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'srate': Sampling rate
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param widths: Array of scales for wavelet transform
     :type widths: np.ndarray
@@ -733,10 +692,7 @@ def short_time_Fourier_transform(data, nperseg, noverlap, window_method='hamming
     """
     Compute Short-Time Fourier Transform (STFT) for signal data
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'srate': Sampling rate
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param nperseg: Length of each segment
     :type nperseg: int
@@ -831,9 +787,7 @@ def local_network_features(data, edge_retention_rate=1, is_relative_thresholds=T
     """
     Calculate local network properties
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param edge_retention_rate: Proportion of edges to retain
     :type edge_retention_rate: float
@@ -884,9 +838,7 @@ def global_network_features(data, edge_retention_rate=1, is_relative_thresholds=
     """
     Calculate global network properties
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param edge_retention_rate: Proportion of edges to retain
     :type edge_retention_rate: float
@@ -940,9 +892,7 @@ def hjorth_parameters(data, is_save=False, is_sliding=False, window_size=None, o
     """
     Calculate Hjorth parameters (Activity, Mobility, Complexity)
 
-    :param data: Signal data dictionary with keys:
-        - 'data': Signal data, numpy array
-        - 'ch_names': List of channel names
+    :param data: Signal data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -1023,10 +973,7 @@ def aperiodic_parameters(data, is_save, save_path=None, save_filestyle='mat'):
     """
     Extract aperiodic components using FOOOF model
 
-    :param data: EEG data dictionary with keys:
-        - 'data': EEG signal data, numpy array
-        - 'srate': Sampling rate
-        - 'ch_names': List of channel names
+    :param data: EEG data dictionary with keys
     :type data: dict
     :param is_save: Save results flag
     :type is_save: bool
@@ -1198,9 +1145,7 @@ def fnirs_run_glm(data, design_matrix):
     """
     Run GLM analysis for fNIRS data
 
-    :param data: fNIRS data dictionary with keys:
-        - 'data': Signal data
-        - 'ch_names': Channel names
+    :param data: fNIRS data dictionary with keys
     :type data: dict
     :param design_matrix: Design matrix from fnirs_make_design_matrix
     :type design_matrix: pd.DataFrame
@@ -1224,9 +1169,7 @@ def ecg_hrv(data):
     """
     Calculate heart rate variability (HRV) from ECG
 
-    :param data: ECG data dictionary with keys:
-        - 'data': ECG signal
-        - 'srate': Sampling rate
+    :param data: ECG data dictionary with keys
     :type data: dict
     :return: R-peak indices and RR-intervals
     :rtype: tuple

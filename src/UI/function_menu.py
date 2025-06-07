@@ -15,137 +15,166 @@ from BrainFusion.pipeLine.pipeLine_with_dialog import EEGPreprocessingConfigWind
     RootMeanSquareDialog, VarianceDialog, MeanAbsoluteValueDialog, ZeroCrossingDialog, HjorthParametersDialog, \
     EEGPowerSpectralDensityDialog, AperiodicParametersDialog, SampleEntropyDialog, MultiscaleEntropyDialog, \
     ShortTimeFourierTransformDialog, WaveletTransformDialog, ContinuousWaveletTransformDialog, \
-    WaveletPacketEnergyDialog, LocalNetworkDialog, GlobalNetworkDialog, EEGMicrostateDialog, PunctuationDialog, \
+    WaveletPacketEnergyDialog, LocalNetworkDialog, GlobalNetworkDialog, EEGMicrostateDialog, \
     CreateSegments, EMGPreprocessingConfigWindow, ECGPreprocessingConfigWindow, EEGPreprocessingByRawConfigWindow
 from BrainFusion.utils.BIDS import BIDSConverter
 
 
 class PreprocessMenu(QWidget):
-    def __init__(self):
-        super().__init__()
+    """Menu for signal preprocessing options."""
 
-        # 初始化UI
+    def __init__(self):
+        """Initialize preprocessing menu."""
+        super().__init__()
         self.initUI()
 
     def initUI(self):
-        # 创建一个垂直布局
+        """
+        Initialize user interface components.
+        """
+        # Create vertical layout
         vbox = QVBoxLayout()
 
-        # 添加图片
+        # Add logo image
         self.label = QLabel(self)
-        pixmap = QPixmap('resources/logo/brain_fusion(1).png')  # 确保替换为正确的图片路径
+        pixmap = QPixmap('resources/logo/brain_fusion(1).png')  # Update with correct path
         if pixmap.isNull():
             print("Failed to load image!")
         self.label.setPixmap(pixmap)
-        self.label.setScaledContents(True)  # 让图片适应label大小
-        self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # 设置label自动扩展
-        self.label.setAlignment(Qt.AlignCenter)  # 内容居中
+        self.label.setScaledContents(True)  # Scale image to fit label
+        self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # Enable label expansion
+        self.label.setAlignment(Qt.AlignCenter)  # Center content
         vbox.addWidget(self.label)
         vbox.addStretch(1)
 
+        # Initialize preprocessing dialogs
         self.eeg_dialog = EEGPreprocessingByRawConfigWindow(feature_name='eeg_preprocessed')
         self.fnirs_dialog = fNIRSPreprocessingConfigWindow(feature_name='fnirs_preprocessed')
         self.emg_dialog = EMGPreprocessingConfigWindow(feature_name='emg_preprocessed')
         self.ecg_dialog = ECGPreprocessingConfigWindow(feature_name='ecg_preprocessed')
 
-        # 添加五个按钮
+        # Create processing option buttons
         self.bnt_eeg = QPushButton("EEG Preprocess Pipeline")
         self.bnt_emg = QPushButton("EMG Preprocess Pipeline")
         self.bnt_ecg = QPushButton("ECG Preprocess Pipeline")
         self.bnt_fnirs = QPushButton("fNIRS Preprocess Pipeline")
         self.bnt_other = QPushButton("Custom Preprocess Pipeline")
 
+        # Connect button signals
         self.bnt_eeg.clicked.connect(self.open_eeg_preprocess_dialog)
         self.bnt_fnirs.clicked.connect(self.open_fnirs_preprocess_dialog)
         self.bnt_emg.clicked.connect(self.open_emg_preprocess_dialog)
         self.bnt_ecg.clicked.connect(self.open_ecg_preprocess_dialog)
 
+        # Add buttons to layout
         vbox.addWidget(self.bnt_eeg)
         vbox.addWidget(self.bnt_emg)
         vbox.addWidget(self.bnt_ecg)
         vbox.addWidget(self.bnt_fnirs)
         vbox.addWidget(self.bnt_other)
         vbox.addStretch(1)
-        # 设置布局
+
+        # Set layout
         self.setLayout(vbox)
 
-        # 窗口设置
-        self.setWindowTitle('signal preprocess menu')
+        # Configure window
+        self.setWindowTitle('Signal Preprocessing Menu')
         self.center_on_screen()
 
     def open_eeg_preprocess_dialog(self):
+        """Display EEG preprocessing configuration dialog."""
         self.eeg_dialog.show()
 
     def open_fnirs_preprocess_dialog(self):
+        """Display fNIRS preprocessing configuration dialog."""
         self.fnirs_dialog.show()
 
     def open_emg_preprocess_dialog(self):
+        """Display EMG preprocessing configuration dialog."""
         self.emg_dialog.show()
 
     def open_ecg_preprocess_dialog(self):
+        """Display ECG preprocessing configuration dialog."""
         self.ecg_dialog.show()
 
     def center_on_screen(self):
+        """
+        Center window on screen.
+        """
         screen_geometry = QApplication.desktop().screenGeometry()
         screen_center = screen_geometry.center()
         self_geometry = self.geometry()
         self_geometry.moveCenter(screen_center)
         self.setGeometry(self_geometry.x(), self_geometry.y(), 300, 400)
 
-class UtilsMenu(QWidget):
-    def __init__(self):
-        super().__init__()
 
-        # 初始化UI
+class UtilsMenu(QWidget):
+    """Menu for utility functions and tools."""
+
+    def __init__(self):
+        """Initialize utilities menu."""
+        super().__init__()
         self.initUI()
 
     def initUI(self):
-        # 创建一个垂直布局
+        """
+        Initialize user interface components.
+        """
+        # Create vertical layout
         vbox = QVBoxLayout()
 
-        # 添加图片
+        # Add logo image
         self.label = QLabel(self)
-        pixmap = QPixmap('resources/logo/brain_fusion(1).png')  # 确保替换为正确的图片路径
+        pixmap = QPixmap('resources/logo/brain_fusion(1).png')  # Update with correct path
         if pixmap.isNull():
             print("Failed to load image!")
         self.label.setPixmap(pixmap)
-        self.label.setScaledContents(True)  # 让图片适应label大小
-        self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # 设置label自动扩展
-        self.label.setAlignment(Qt.AlignCenter)  # 内容居中
+        self.label.setScaledContents(True)  # Scale image to fit label
+        self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # Enable label expansion
+        self.label.setAlignment(Qt.AlignCenter)  # Center content
         vbox.addWidget(self.label)
         vbox.addStretch(1)
 
-        # 添加五个按钮
+        # Create utility function buttons
         self.bnt_bids = QPushButton("BIDS Converter")
         self.bnt_epoch = QPushButton("Epoch Creator")
         self.bnt_multi_epoch = QPushButton("Multi-Signals Epoch Creator")
 
+        # Connect button signals
         self.bnt_bids.clicked.connect(self.open_bids_converter_dialog)
         self.bnt_epoch.clicked.connect(self.open_epochs_creator_dialog)
 
+        # Add buttons to layout
         vbox.addWidget(self.bnt_bids)
         vbox.addWidget(self.bnt_epoch)
         vbox.addWidget(self.bnt_multi_epoch)
         vbox.addStretch(1)
-        # 设置布局
+
+        # Set layout
         self.setLayout(vbox)
 
-        # 窗口设置
-        self.setWindowTitle('utils menu')
+        # Configure window
+        self.setWindowTitle('Utilities Menu')
         self.center_on_screen()
 
     def open_bids_converter_dialog(self):
+        """Display BIDS format conversion tool."""
         self.bids_converter_dialog = BIDSConverter()
         self.bids_converter_dialog.show()
 
     def open_epochs_creator_dialog(self):
+        """Display epoch creation tool."""
         self.epochs_dialog = CreateSegments('epochs')
         self.epochs_dialog.show()
 
     def open_multi_signals_epochs_creator_dialog(self):
+        """Reserved for future multi-signal epoch creation."""
         pass
 
     def center_on_screen(self):
+        """
+        Center window on screen.
+        """
         screen_geometry = QApplication.desktop().screenGeometry()
         screen_center = screen_geometry.center()
         self_geometry = self.geometry()
@@ -154,29 +183,33 @@ class UtilsMenu(QWidget):
 
 
 class FeatureMenu(QWidget):
-    def __init__(self):
-        super().__init__()
+    """Menu for feature calculation options."""
 
-        # 初始化UI
+    def __init__(self):
+        """Initialize feature calculation menu."""
+        super().__init__()
         self.initUI()
 
     def initUI(self):
-        # 创建一个垂直布局
+        """
+        Initialize user interface components.
+        """
+        # Create vertical layout
         vbox = QVBoxLayout()
 
-        # 添加图片
+        # Add logo image
         self.label = QLabel(self)
-        pixmap = QPixmap('resources/logo/brain_fusion(1).png')  # 确保替换为正确的图片路径
+        pixmap = QPixmap('resources/logo/brain_fusion(1).png')  # Update with correct path
         if pixmap.isNull():
             print("Failed to load image!")
         self.label.setPixmap(pixmap)
-        self.label.setScaledContents(True)  # 让图片适应label大小
-        self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # 设置label自动扩展
-        self.label.setAlignment(Qt.AlignCenter)  # 内容居中
+        self.label.setScaledContents(True)  # Scale image to fit label
+        self.label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # Enable label expansion
+        self.label.setAlignment(Qt.AlignCenter)  # Center content
         vbox.addWidget(self.label)
         vbox.addStretch(1)
 
-        # 添加五个按钮
+        # Create feature category buttons
         self.bnt_time = QPushButton("Time Domain")
         self.bnt_frequency = QPushButton("Frequency Domain")
         self.bnt_time_frequency = QPushButton("Time-Frequency")
@@ -184,9 +217,7 @@ class FeatureMenu(QWidget):
         self.bnt_network = QPushButton("Network Analysis")
         self.bnt_microstate = QPushButton("Microstate")
 
-        # self.bnt_eeg.clicked.connect(self.open_eeg_preprocess_dialog)
-        # self.bnt_fnirs.clicked.connect(self.open_fnirs_preprocess_dialog)
-
+        # Add buttons to layout
         vbox.addWidget(self.bnt_time)
         vbox.addWidget(self.bnt_frequency)
         vbox.addWidget(self.bnt_time_frequency)
@@ -194,14 +225,19 @@ class FeatureMenu(QWidget):
         vbox.addWidget(self.bnt_network)
         vbox.addWidget(self.bnt_microstate)
         vbox.addStretch(1)
-        # 设置布局
+
+        # Set layout
         self.setLayout(vbox)
 
-        # 窗口设置
+        # Configure window
         self.setGeometry(100, 100, 300, 400)
-        self.setWindowTitle('feature calculation menu')
+        self.setWindowTitle('Feature Calculation Menu')
+        self.center_on_screen()
 
     def center_on_screen(self):
+        """
+        Center window on screen.
+        """
         screen_geometry = QApplication.desktop().screenGeometry()
         screen_center = screen_geometry.center()
         self_geometry = self.geometry()
@@ -210,53 +246,58 @@ class FeatureMenu(QWidget):
 
 
 class NewFeatureMenu(QWidget):
-    def __init__(self):
-        super().__init__()
+    """Feature selection menu with collapsible tree view."""
 
+    def __init__(self):
+        """Initialize feature selection menu."""
+        super().__init__()
         self.initUI()
 
     def initUI(self):
-        # 创建一个 QTreeWidget
+        """
+        Initialize user interface components.
+        """
+        # Create QTreeWidget for feature categories
         self.tree = QTreeWidget(self)
-        # 设置 QTreeWidget 的样式
+        # Configure widget styling
         self.tree.setStyleSheet("""
-                    QTreeWidget {
-                        background-color: #ffffff;
-                        font-size: 18px;
-                        border: none;
-                        outline: 0;
-                        font-weight: bold;
-                    }
-                    QTreeWidget::item {
-                        padding: 5px;
-                        border-bottom: 1px solid #dcdcdc;
-                    }
-                    QTreeWidget::item:has-children {
-                        background-color: #0288D1;
-                        border: 1px solid #000000;
-                        font-weight: bold;
-                        color: white;
-                    }
-                    QTreeWidget::item:selected {
-                        background-color: #E1F5FE;
-                        color: black;
-                    }
-                    QTreeWidget::item:hover {
-                        background-color: #E1F5FE;
-                        color: black;
-                        font-weight: bold;
-                    }
-                    QHeaderView::section {
-                        font-size: 20px;
-                        background-color: #f0f0f0;
-                        padding: 5px;
-                        border: none;
-                        font-weight: bold;
-                    }
-                """)
+            QTreeWidget {
+                background-color: #ffffff;
+                font-size: 18px;
+                border: none;
+                outline: 0;
+                font-weight: bold;
+            }
+            QTreeWidget::item {
+                padding: 5px;
+                border-bottom: 1px solid #dcdcdc;
+            }
+            QTreeWidget::item:has-children {
+                background-color: #0288D1;
+                border: 1px solid #000000;
+                font-weight: bold;
+                color: white;
+            }
+            QTreeWidget::item:selected {
+                background-color: #E1F5FE;
+                color: black;
+            }
+            QTreeWidget::item:hover {
+                background-color: #E1F5FE;
+                color: black;
+                font-weight: bold;
+            }
+            QHeaderView::section {
+                font-size: 20px;
+                background-color: #f0f0f0;
+                padding: 5px;
+                border: none;
+                font-weight: bold;
+            }
+        """)
         self.tree.setHeaderLabels(['Feature Selection'])
 
-        # 创建子菜单和子项
+        # Create feature category branches
         time_domain_menu = QTreeWidgetItem(self.tree, ['Time Domain'])
         time_domain_menu.setFlags(time_domain_menu.flags() & ~Qt.ItemIsSelectable)
         time_domain_menu.addChild(QTreeWidgetItem(['root mean square']))
@@ -287,33 +328,32 @@ class NewFeatureMenu(QWidget):
         network_menu.setFlags(network_menu.flags() & ~Qt.ItemIsSelectable)
         network_menu.addChild(QTreeWidgetItem(['local network']))
         network_menu.addChild(QTreeWidgetItem(['global network']))
-        # network_menu.addChild(QTreeWidgetItem(['dynamic network']))
 
         microstate_menu = QTreeWidgetItem(self.tree, ['Microstate'])
         microstate_menu.setFlags(microstate_menu.flags() & ~Qt.ItemIsSelectable)
         microstate_menu.addChild(QTreeWidgetItem(['microstate (eeg)']))
 
-        # 展开所有节点
+        # Expand all category branches
         self.tree.expandAll()
 
-        # 连接 itemClicked 信号到处理函数
+        # Connect click events to handler
         self.tree.itemClicked.connect(self.onItemClicked)
 
-        # 创建布局并添加 QTreeWidget
+        # Create layout and add widget
         layout = QVBoxLayout()
         layout.addWidget(self.tree)
         self.setLayout(layout)
 
+        # Initialize feature dialogs
         self.feature_dialog_init()
 
-        # 设置窗口属性
-        # self.setGeometry(100, 100, 400, 300)
+        # Configure window
         self.setWindowTitle('Feature Selection Tree')
         self.center_on_screen()
         self.resize(600, 800)
-        self.show()
 
     def feature_dialog_init(self):
+        """Initialize dialog windows for feature configuration."""
         self.rms_dialog = RootMeanSquareDialog('rms')
         self.variance_dialog = VarianceDialog('var')
         self.mav_dialog = MeanAbsoluteValueDialog('mav')
@@ -337,11 +377,19 @@ class NewFeatureMenu(QWidget):
 
         self.microstate = EEGMicrostateDialog('microstate')
 
-
     def onItemClicked(self, item, column):
-        # 获取被点击的项目文本
+        """
+        Handle feature item selection.
+
+        :param item: Selected feature item
+        :type item: QTreeWidgetItem
+        :param column: Column index of the selection
+        :type column: int
+        """
+        # Get name of selected feature
         algorithm = item.text(0)
 
+        # Open corresponding configuration dialog
         if algorithm == 'root mean square':
             self.rms_dialog.show()
         elif algorithm == 'variance':
@@ -378,9 +426,11 @@ class NewFeatureMenu(QWidget):
             self.microstate.show()
 
     def center_on_screen(self):
+        """
+        Center window on screen. Calculates screen dimensions and positions window at center.
+        """
         screen_geometry = QApplication.desktop().screenGeometry()
         screen_center = screen_geometry.center()
         self_geometry = self.geometry()
         self_geometry.moveCenter(screen_center)
         self.setGeometry(self_geometry.x(), self_geometry.y(), 300, 400)
-

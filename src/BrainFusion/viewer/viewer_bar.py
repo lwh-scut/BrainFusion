@@ -6,83 +6,115 @@ import matplotlib.pyplot as plt
 
 
 class MultiBarChartApp(QMainWindow):
+    """
+    Application for visualizing Excel data through multi-subplot bar charts.
+
+    :param main_widget: Main container widget
+    :type main_widget: QWidget
+    :param canvas: Matplotlib figure canvas
+    :type canvas: FigureCanvas
+    """
+
     def __init__(self):
+        """Initialize the main window components."""
         super().__init__()
-        self.setWindowTitle("Excel 数据多子图柱状图")
+        self.setWindowTitle("Excel Data Multi-Subplot Bar Chart Visualizer")
         self.setGeometry(100, 100, 1200, 800)
 
-        # 主窗口布局
+        # Main window layout components
         self.main_widget = QWidget()
         self.layout = QVBoxLayout(self.main_widget)
 
-        # 按钮用于选择Excel文件
-        self.button = QPushButton("加载 Excel 文件")
+        # Excel file loader button
+        self.button = QPushButton("Load Excel File")
         self.button.clicked.connect(self.load_excel_file)
         self.layout.addWidget(self.button)
 
-        # Matplotlib FigureCanvas
+        # Matplotlib visualization canvas
         self.canvas = FigureCanvas(plt.figure(figsize=(10, 8)))
         self.layout.addWidget(self.canvas)
 
         self.setCentralWidget(self.main_widget)
 
     def load_excel_file(self):
-        # 打开文件对话框选择 Excel 文件
-        file_path, _ = QFileDialog.getOpenFileName(self, "选择 Excel 文件", "", "Excel Files (*.xlsx *.xls)")
+        """
+        Open file dialog to select and load Excel data.
+
+        :returns: None
+        """
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Select Excel File",
+            "",
+            "Excel Files (*.xlsx *.xls)"
+        )
         if not file_path:
             return
 
-        # 读取 Excel 数据
+        # Attempt to read Excel data
         try:
             data = pd.read_excel(file_path)
         except Exception as e:
-            print(f"读取文件失败: {e}")
+            print(f"File loading failed: {e}")
             return
 
-        # 检查数据格式是否正确
+        # Validate data format
         if data.shape[1] < 2:
-            print("数据格式不正确，请确保至少有两列数据")
+            print("Invalid data format - requires at least two columns")
             return
 
-        # 使用数据绘制柱状图
+        # Generate bar charts
         self.plot_bar_charts(data)
 
     def plot_bar_charts(self, data):
-        plt.clf()  # 清空图像
+        """
+        Visualize Excel data through multi-subplot bar charts.
 
-        num_subplots = data.shape[1] // 2  # 每两列对应一个子图
+        :param data: Tabular data from Excel
+        :type data: pandas.DataFrame
+        """
+        plt.clf()  # Clear existing figure
+
+        # Calculate number of subplots (one per column pair)
+        num_subplots = data.shape[1] // 2
         if num_subplots == 0:
-            print("数据格式不正确，请确保至少有两列数据")
+            print("Insufficient columns - requires pairs of data columns")
             return
 
-        # 创建子图
+        # Create subplots
         fig, axes = plt.subplots(num_subplots, 1, figsize=(10, 8))
         if num_subplots == 1:
-            axes = [axes]  # 保证 axes 是一个可迭代的列表
+            axes = [axes]  # Ensure axes is iterable for single subplot
 
-        for i in range(num_subplots):
-            ax = axes[i]
-            x = data.iloc[:, i * 2]  # 每两个列中的第一列为 x 轴
-            y = data.iloc[:, i * 2 + 1]  # 每两个列中的第二列为 y 轴
+        # Generate each subplot
+        for i, ax in enumerate(axes):
+            x = data.iloc[:, i * 2]  # First column in pair as x-values
+            y = data.iloc[:, i * 2 + 1]  # Second column in pair as y-values
 
-            # 绘制柱状图
-            bars = ax.bar(x, y, width=0.6, color='skyblue', label=f'图 {i + 1}')
+            # Create bar chart
+            bars = ax.bar(x, y, width=0.6, color='skyblue', label=f'Chart {i + 1}')
 
-            # 添加注释
+            # Add value labels
             for bar in bars:
                 height = bar.get_height()
-                ax.text(bar.get_x() + bar.get_width() / 2, height, f'{height:.2f}', ha='center', va='bottom')
+                ax.text(
+                    bar.get_x() + bar.get_width() / 2,
+                    height,
+                    f'{height:.2f}',
+                    ha='center',
+                    va='bottom'
+                )
 
-            # 设置图例和标题
+            # Configure chart elements
             ax.legend()
-            ax.set_title(f'子图 {i + 1}')
-            ax.set_xlabel("类别")
-            ax.set_ylabel("值")
+            ax.set_title(f'Subplot {i + 1}')
+            ax.set_xlabel("Category")
+            ax.set_ylabel("Value")
 
-        # 调整布局，避免重叠
+        # Optimize layout spacing
         plt.tight_layout()
 
-        # 更新画布
+        # Refresh visualization
         self.canvas.draw()
 
 

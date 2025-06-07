@@ -8,23 +8,24 @@ from statsmodels.stats.multitest import multipletests
 
 def calculate_significance(data_dict, method="t-test", paired=False):
     """
-    计算字典中数据之间的显著性。
+    Perform statistical tests between group means or distributions.
 
-    Args:
-        data_dict (dict): 包含多组数据的字典，键为组名，值为数据列表。
-        method (str): 选择统计方法，支持 "t-test", "paired-t-test", "anova",
-                      "mann-whitney", "wilcoxon", "kruskal-wallis"。
-        paired (bool): 是否进行配对检验（仅对 t-test 和非参数 Wilcoxon 生效）。
-
-    Returns:
-        list: 包含每对组的统计量和 p 值的显著性测试结果。
+    :param data_dict: Dictionary containing data groups with group names as keys
+    :type data_dict: dict
+    :param method: Statistical method to use (default: "t-test")
+    :type method: str
+    :param paired: Flag for paired/dependent samples (default: False)
+    :type paired: bool
+    :return: List of results containing test statistics and p-values
+    :rtype: list
+    :raises ValueError: For insufficient groups or invalid method names
     """
     groups = list(data_dict.keys())
     data = list(data_dict.values())
     results = []
 
     if len(groups) < 2:
-        raise ValueError("至少需要两组数据进行比较。")
+        raise ValueError("At least two groups required for comparison")
 
     for group1, group2 in combinations(groups, 2):
         result = {}
@@ -49,22 +50,22 @@ def calculate_significance(data_dict, method="t-test", paired=False):
 
         elif method == "wilcoxon":
             if not paired:
-                raise ValueError("Wilcoxon 检验仅支持配对数据的比较。")
+                raise ValueError("Wilcoxon test requires paired data")
             if len(data1) != len(data2):
-                raise ValueError("Wilcoxon 检验要求两组数据的长度相等。")
+                raise ValueError("Equal sample size required for Wilcoxon test")
             differences = np.array(data1) - np.array(data2)
             try:
                 stat, p_value = stats.wilcoxon(differences)
                 result["method"] = "Wilcoxon signed-rank test"
             except ValueError as e:
-                raise ValueError(f"Wilcoxon 检验中出现错误: {str(e)}")
+                raise ValueError(f"Wilcoxon test error: {str(e)}")
 
         elif method == "kruskal-wallis":
             stat, p_value = stats.kruskal(data1, data2)
             result["method"] = "Kruskal-Wallis test"
 
         else:
-            raise ValueError(f"未知的统计方法: {method}")
+            raise ValueError(f"Unsupported statistical method: {method}")
 
         result["group_comparison"] = f"{group1} vs {group2}"
         result["stat"] = stat
@@ -76,48 +77,56 @@ def calculate_significance(data_dict, method="t-test", paired=False):
 
 def multiple_comparison_correction(results, correction_method="bonferroni"):
     """
-        对显著性检验的 p 值进行多重比较校正。
+    Apply multiple comparison correction to raw p-values.
 
-        Args:
-            results (list): 包含每对组的统计量和 p 值的显著性测试结果。
-            correction_method (str): 校正方法，支持 "bonferroni" 和 "fdr_bh"。
-
-        Returns:
-            list: 更新后的显著性测试结果，包含校正后的 p 值和显著性标记。
-        """
+    :param results: Output from calculate_significance function
+    :type results: list
+    :param correction_method: Correction method (default: "bonferroni")
+    :type correction_method: str
+    :return: Results with corrected p-values and significance flags
+    :rtype: list
+    """
     p_values = [result["p_value"] for result in results]
 
-    if len(p_values) <= 2:
+    # Skip correction if ≤2 comparisons
+    if len(p_values) <= 1:
         for result in results:
             result["corrected_p_value"] = result["p_value"]
             result["significant_after_correction"] = result["p_value"] < 0.05
         return results
 
-    corrected_results = multipletests(p_values, method=correction_method)
-    corrected_p_values = corrected_results[1]  # 校正后的 p 值
-    significant_flags = corrected_results[0]  # 显著性标记
+    # Apply chosen correction method
+    corrected = multipletests(p_values, method=correction_method)
+    corrected_p_vals = corrected[1]  # Adjusted p-values
+    significance_flags = corrected[0]  # Significance indicators
 
+    # Update results with corrected values
     for i, result in enumerate(results):
-        result["corrected_p_value"] = corrected_p_values[i]
-        result["significant_after_correction"] = significant_flags[i]
+        result["corrected_p_value"] = corrected_p_vals[i]
+        result["significant_after_correction"] = significance_flags[i]
 
     return results
 
 
 if __name__ == '__main__':
-    np.random.seed(42)  # 固定随机种子以便重现
-    n = 50  # 样本大小
-    data1 = np.random.normal(loc=50, scale=10, size=n)  # 第一组样本
-    data2 = np.random.normal(loc=52, scale=10, size=n)  # 第二组样本
-    data3 = np.random.normal(loc=52, scale=10, size=n)  # 第二组样本
+    # Demonstration of statistical functions
+    np.random.seed(42)  # Set random seed for reproducibility
+    n = 50  # Sample size per group
 
-    data = {
-        "Group A": data1,
-        "Group B": data2,
-        "Group C": data3
+    # Generate synthetic group data
+    group_data = {
+        "Group A": np.random.normal(loc=50, scale=10, size=n),
+        "Group B": np.random.normal(loc=52, scale=10, size=n),
+        "Group C": np.random.normal(loc=52, scale=10, size=n)
     }
-    results = calculate_significance(data, method="wilcoxon", paired=True)
-    corrected_results = multiple_comparison_correction(results, correction_method="fdr_bh")
+
+    # Compute significance tests
+    test_results = calculate_significance(group_data, method="mann-whitney")
+
+    # Apply multiple comparison correction
+    corrected_results = multiple_comparison_correction(
+        test_results,
+        correction_method="fdr_bh"
+    )
 
     print(corrected_results)
-

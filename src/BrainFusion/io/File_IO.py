@@ -52,7 +52,6 @@ def create_data_dict(data, srate, nchan=None, ch_names=None, events=None,
     :type save_path: str, optional
     :param save_filestyle: File format for saving ('mat', 'csv', 'json', etc.), defaults to 'mat'
     :type save_filestyle: str, optional
-
     :return: Standardized data dictionary
     :rtype: dict
     """
@@ -76,7 +75,6 @@ def reduce_dimensions(arr):
 
     :param arr: Input array
     :type arr: np.ndarray
-
     :return: Reduced-dimension array
     :rtype: np.ndarray or scalar
     """
@@ -97,7 +95,6 @@ def remove_keys(d, char):
     :type d: dict
     :param char: Character to exclude from keys
     :type char: str
-
     :return: Filtered dictionary
     :rtype: dict
     """
@@ -110,10 +107,8 @@ def check_data_dict(data_dict):
 
     :param data_dict: Data dictionary to validate
     :type data_dict: dict
-
     :return: True if valid
     :rtype: bool
-
     :raises TypeError: If input is not a dictionary
     :raises ValueError: If required fields are missing or invalid
     """
@@ -135,7 +130,6 @@ def find_bids_files(root_folder):
 
     :param root_folder: Root directory to scan
     :type root_folder: str
-
     :return: List of found data files with associated label files
     :rtype: list[dict]
     """
@@ -173,10 +167,8 @@ def read_one_bids_file(path_list):
 
     :param path_list: List of file paths in BIDS format
     :type path_list: list[dict]
-
     :return: Dictionary of loaded data
     :rtype: dict
-
     :raises ValueError: If path_list is empty
     """
     data_dict = {}
@@ -205,7 +197,6 @@ def read_file_by_qt(widget, path=None):
     :type widget: QWidget
     :param path: Predefined file path, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded data and file path
     :rtype: tuple(object, str)
     """
@@ -258,7 +249,6 @@ def read_file_by_mne(widget, path=None):
     :type widget: QWidget
     :param path: Predefined file path, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: MNE Raw object and file path
     :rtype: tuple(mne.io.Raw, str)
     """
@@ -288,7 +278,6 @@ def read_file_by_path(path=None):
 
     :param path: File path or tuple of paths, defaults to None
     :type path: str or tuple, optional
-
     :return: Loaded data
     :rtype: dict or object
     """
@@ -326,7 +315,6 @@ def read_file(path=None):
 
     :param path: Predefined file path, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded data
     :rtype: dict
     """
@@ -378,10 +366,8 @@ def read_neuracle_bdf(path=None, is_data_transform=True):
     :type path: str or tuple, optional
     :param is_data_transform: Whether to transform data to standard format, defaults to True
     :type is_data_transform: bool, optional
-
     :return: Loaded BDF data
     :rtype: dict
-
     :raises TypeError: For invalid file formats or missing files
     """
 
@@ -468,7 +454,6 @@ def read_csv(path=None):
 
     :param path: Path to CSV file, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded data dictionary
     :rtype: dict
     """
@@ -504,7 +489,6 @@ def read_txt(path=None):
 
     :param path: Path to text file, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded data
     :rtype: dict
     """
@@ -529,7 +513,6 @@ def read_npy(path=None):
 
     :param path: Path to .npy file, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded array
     :rtype: np.ndarray
     """
@@ -554,7 +537,6 @@ def read_mat(path=None):
 
     :param path: Path to .mat file, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded data dictionary
     :rtype: dict
     """
@@ -600,7 +582,6 @@ def read_edf(path=None):
 
     :param path: Path to EDF file, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded data dictionary
     :rtype: dict
     """
@@ -643,7 +624,6 @@ def read_bdf(path=None, type='eeg', montage=None):
     :type type: str, optional
     :param montage: Sensor montage information, defaults to None
     :type montage: str, optional
-
     :return: Loaded data dictionary
     :rtype: dict
     """
@@ -694,7 +674,6 @@ def read_minilab_snirf(path=None, type='fnirs'):
     :type path: str, optional
     :param type: Data type, defaults to 'fnirs'
     :type type: str, optional
-
     :return: Loaded data dictionary with additional metadata
     :rtype: dict
     """
@@ -752,7 +731,6 @@ def read_minilab_bdf(path, type='eeg', montage=''):
     :type type: str, optional
     :param montage: Sensor montage information, defaults to ''
     :type montage: str, optional
-
     :return: Loaded data dictionary with additional metadata
     :rtype: dict
     """
@@ -790,7 +768,6 @@ def read_json(path=None):
 
     :param path: Path to JSON file, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded data
     :rtype: dict
     """
@@ -817,7 +794,6 @@ def read_snirf(path=None, type='fnirs'):
     :type path: str, optional
     :param type: Data type, defaults to 'fnirs'
     :type type: str, optional
-
     :return: Loaded data dictionary
     :rtype: dict
     """
@@ -841,7 +817,6 @@ def read_nirs(path=None):
 
     :param path: Path to .nirs file, defaults to None (opens dialog)
     :type path: str, optional
-
     :return: Loaded data dictionary
     :rtype: dict
     """
@@ -900,7 +875,6 @@ def read_ecg(file_path):
 
     :param file_path: Path to ECG file
     :type file_path: str
-
     :return: ECG data dictionary
     :rtype: dict
     """
@@ -930,7 +904,6 @@ def read_xlsx(file_path):
 
     :param file_path: Path to Excel file
     :type file_path: str
-
     :return: Feature dictionary
     :rtype: dict
     """
@@ -959,7 +932,6 @@ def array_to_string(array):
 
     :param array: Input array
     :type array: np.ndarray
-
     :return: String representation of array
     :rtype: str
     """
@@ -975,7 +947,6 @@ def save_prepare(data):
 
     :param data: Data to prepare
     :type data: dict
-
     :return: Prepared data
     :rtype: dict
     """
@@ -1051,7 +1022,6 @@ def convert_to_list(data):
 
     :param data: Input data (array or nested structure)
     :type data: any
-
     :return: Converted data
     :rtype: list or primitive
     """
@@ -1076,17 +1046,6 @@ def dict_to_snirf(data_dict, output_path):
     :type data_dict: dict
     :param output_path: Output file path
     :type output_path: str
-
-    Required dictionary fields:
-        'data' (np.ndarray): Signal data (timepoints x channels)
-        'time' (np.ndarray): Time vector
-        'events' (list): Event markers [[onset, duration, label], ...]
-        'ch_names' (list): Channel names
-        'loc' (dict): Location information (sourcePos3D, detectorPos3D, landmarkPos3D)
-        'sd' (list): Source-detector pairs [(source_idx, detector_idx), ...]
-        'wavelengths' (list): Measurement wavelengths
-
-    :return: None
     """
     # Prepare data
     data_time_series = np.array(data_dict.get('data'))
@@ -1143,19 +1102,6 @@ def dict_to_bdf(data_dict, output_path):
     :type data_dict: dict
     :param output_path: Output file path
     :type output_path: str
-
-    Required dictionary fields:
-        'data' (np.ndarray): Signal data (channels x samples)
-        'srate' (float): Sampling rate
-        'ch_names' (list): Channel names
-        'events' (list): Event markers [[onset, duration, description], ...]
-        'file_info' (dict): File information (PhysicalMin, PhysicalMax, etc.)
-
-    Optional fields for patient information:
-        'technician', 'equipment', 'patient_code', 'patient_name',
-        'birthdate', 'admin_code'
-
-    :return: None
     """
     signals = np.array(data_dict['data']) * 1000000
     n_channels, n_samples = signals.shape
@@ -1210,7 +1156,6 @@ def save_csv(data, path=None):
     :type data: dict
     :param path: Save path, defaults to None (opens dialog)
     :type path: str, optional
-
     :raises ValueError: If data validation fails
     """
     root = Tk()
@@ -1238,7 +1183,6 @@ def save_json(data, path=None):
     :type data: dict
     :param path: Save path, defaults to None (opens dialog)
     :type path: str, optional
-
     :raises ValueError: If data validation fails
     """
     root = Tk()
@@ -1287,7 +1231,6 @@ def save_txt(data, path=None):
     :type data: dict
     :param path: Save path, defaults to None (opens dialog)
     :type path: str, optional
-
     :raises ValueError: If data validation fails
     """
     root = Tk()

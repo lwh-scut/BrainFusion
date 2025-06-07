@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2024/6/15 22:14
-# @Author  : XXX
-# @Site    : 
-# @File    : bids.py
-# @Software: PyCharm 
-# @Comment :
 import shutil
 import sys
 import os
@@ -14,15 +7,19 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QLabel, QTreeWi
                              QLineEdit, QFileDialog, QHBoxLayout, QGroupBox, QFormLayout, QComboBox, QScrollArea,
                              QMessageBox)
 from PyQt5.QtCore import Qt
-import pyedflib
 
-from BrainFusion.io.File_IO import read_bdf, read_edf, save_metadata, read_file, read_file_by_qt
+from BrainFusion.io.File_IO import save_metadata, read_file_by_qt
 from BrainFusion.utils.files import compareFileSizes
 from UI.ui_component import BFSelectWidget, BFPushButton, BFGroupBox, BFScrollArea
 
 
 class BIDSConverter(QWidget):
+    """BIDS format conversion tool for EEG/fNIRS data."""
+
     def __init__(self):
+        """
+        Initialize BIDS Converter application.
+        """
         super().__init__()
 
         self.data_dict = {
@@ -43,20 +40,21 @@ class BIDSConverter(QWidget):
         self.initUI()
 
     def initUI(self):
+        """Initialize user interface components."""
         layout = QVBoxLayout()
-        # 文件选择部分
+        # File selection section
         file_group = BFGroupBox("File Selection")
         file_layout = QHBoxLayout()
         self.browse_button = BFPushButton("Browse")
         self.browse_button.clicked.connect(self.browse_file)
         file_layout.addWidget(self.browse_button)
         self.file_input = QLineEdit(self)
-        self.file_input.setPlaceholderText("Select a BDF file")
+        self.file_input.setPlaceholderText("Select a BDF/EDF file")
         file_layout.addWidget(self.file_input)
         file_group.setLayout(file_layout)
         layout.addWidget(file_group)
 
-        # 实验信息部分
+        # Experiment information section
         experiment_group = BFGroupBox("Experiment Information")
         experiment_layout = QFormLayout()
 
@@ -75,7 +73,7 @@ class BIDSConverter(QWidget):
         experiment_group.setLayout(experiment_layout)
         layout.addWidget(experiment_group)
 
-        # 数据信息部分
+        # Data information section
         data_info_group = BFGroupBox("Data Information")
         data_info_layout = QFormLayout()
 
@@ -90,10 +88,10 @@ class BIDSConverter(QWidget):
         data_info_layout.addRow("Edit Sample Rate:", self.srate_input)
 
         self.data_length_label = QLabel("N/A seconds")
-        data_info_layout.addRow("Data Length:", self.data_length_label)
+        data_info_layout.addRow("Data Duration:", self.data_length_label)
 
         self.nchan_label = QLabel("N/A")
-        data_info_layout.addRow("Number of Channels:", self.nchan_label)
+        data_info_layout.addRow("Channel Count:", self.nchan_label)
 
         self.powerline = QComboBox()
         self.powerline.addItems(['50 Hz', '60 Hz'])
@@ -112,7 +110,7 @@ class BIDSConverter(QWidget):
         data_info_group.setLayout(data_info_layout)
         layout.addWidget(data_info_group)
 
-        # 可编辑的通道信息部分
+        # Channel information section
         ch_info_group = BFGroupBox("Channel Information")
         ch_info_layout = QVBoxLayout()
 
@@ -126,7 +124,7 @@ class BIDSConverter(QWidget):
         ch_info_group.setLayout(ch_info_layout)
         layout.addWidget(ch_info_group)
 
-        # 可编辑的事件信息部分
+        # Events information section
         events_group = BFGroupBox("Events")
         events_layout = QVBoxLayout()
 
@@ -143,16 +141,16 @@ class BIDSConverter(QWidget):
         events_group.setLayout(events_layout)
         layout.addWidget(events_group)
 
-        # BIDS转换按钮
+        # BIDS conversion button
         self.convert_button = BFPushButton("Convert to BIDS")
         self.convert_button.clicked.connect(self.convert_to_bids)
         layout.addWidget(self.convert_button)
 
-        # 创建一个 ScrollArea 并设置它的内容
+        # Create scrollable content area
         scroll_area = BFScrollArea()
         scroll_area.set_layout(layout)
 
-        # 设置主窗口的布局
+        # Set main window layout
         main_layout = QVBoxLayout(self)
         main_layout.addWidget(scroll_area)
         self.setLayout(main_layout)
@@ -161,6 +159,11 @@ class BIDSConverter(QWidget):
         self.show()
 
     def browse_file(self):
+        """
+        Browse for EEG/fNIRS data files.
+
+        :returns: None
+        """
         data, file_path = read_file_by_qt(self)
 
         if data:
@@ -190,6 +193,7 @@ class BIDSConverter(QWidget):
             self.update_ui()
 
     def update_ui(self):
+        """Update UI with current data information."""
         self.srate_label.setText(f"{self.data_dict['srate']} Hz")
         self.type_label.setText(f"{self.data_dict['type']}")
         self.montage_label.setText(f"{self.data_dict['montage']}")
@@ -233,7 +237,8 @@ class BIDSConverter(QWidget):
                 self.events_list.addTopLevelItem(item)
 
     def add_event(self):
-        # 确保 self.data_dict['events'] 存在且正确格式化
+        """Add new event to events list."""
+        # Ensure events structure exists
         if self.data_dict['events'] is None:
             self.data_dict['events'] = [[], [], []]
         if isinstance(self.data_dict['events'], np.ndarray):
@@ -250,36 +255,53 @@ class BIDSConverter(QWidget):
         self.update_ui()
 
     def handle_item_changed(self, item, column):
+        """
+        Handle channel property changes.
+
+        :param item: Modified item
+        :type item: QTreeWidgetItem
+        :param column: Modified column index
+        :type column: int
+        """
         index = self.ch_names_list.indexOfTopLevelItem(item)
-        if column == 1:  # 如果编辑的是通道类型
+        if column == 1:  # Channel type
             new_channel_type = item.text(1)
             self.data_dict['channel_type'][index] = new_channel_type
-        elif column == 2:  # 如果编辑的是物理量最小值
+        elif column == 2:  # Unit
             unit = item.text(2)
             self.data_dict['units'][index] = unit
-        elif column == 3:  # 如果编辑的是物理量最大值
+        elif column == 3:  # Status
             status = item.text(3)
             self.data_dict['channel_status'][index] = status
-        elif column == 4:  # 如果编辑的是数字量最小值
+        elif column == 4:  # Description
             description = item.text(4)
             self.data_dict['channel_status_description'][index] = description
 
     def handle_event_item_changed(self, item, column):
+        """
+        Handle event property changes.
+
+        :param item: Modified event item
+        :type item: QTreeWidgetItem
+        :param column: Modified column index
+        :type column: int
+        """
         if self.data_dict['events']:
             index = self.events_list.indexOfTopLevelItem(item)
-            if column == 0:  # 编辑 Onset
+            if column == 0:  # Onset time
                 new_onset = float(item.text(0))
                 self.data_dict['events'][0][index] = new_onset
-            elif column == 1:  # 编辑 Duration
+            elif column == 1:  # Duration
                 new_duration = float(item.text(1))
                 self.data_dict['events'][1][index] = new_duration
-            elif column == 2:  # 编辑 Value
+            elif column == 2:  # Value
                 new_value = int(item.text(2))
                 self.data_dict['events'][2][index] = new_value
 
     def convert_to_bids(self):
-        # 打开文件夹选择对话框
-        folder_path = QFileDialog.getExistingDirectory(self, "Select Folder")
+        """Convert data to BIDS format structure."""
+        # Select output folder
+        folder_path = QFileDialog.getExistingDirectory(self, "Select Output Folder")
         if not folder_path:
             return
 
@@ -288,21 +310,21 @@ class BIDSConverter(QWidget):
         task_number = self.task_number_input.text()
 
         if not subject_id or not task_name or not task_number:
-            # 如果subject_id, task_name或task_number为空，提示用户填写这些信息
             return
 
+        # Create BIDS directory structure
         sub_folder = os.path.join(folder_path, f"sub-{subject_id}")
         eeg_folder = os.path.join(sub_folder, "eeg")
         os.makedirs(eeg_folder, exist_ok=True)
 
-        # 保存原始数据文件
+        # Copy original data file
         original_file_path = self.file_input.text()
         _, ext = os.path.splitext(original_file_path)
         new_file_name = f"sub-{subject_id}_task-{task_name}_{task_number}_eeg{ext}"
         new_file_path = os.path.join(eeg_folder, new_file_name)
         shutil.copy(original_file_path, new_file_path)
 
-        # 保存 channels.tsv 和 events.tsv
+        # Save metadata files
         channels_filename = f"sub-{subject_id}_task-{task_name}_{task_number}_channels.tsv"
         channels_file_path = os.path.join(eeg_folder, channels_filename)
         self.save_channels_tsv(channels_file_path)
@@ -315,9 +337,15 @@ class BIDSConverter(QWidget):
         datainfo_file_path = os.path.join(eeg_folder, datainfo_filename)
         self.save_datainfo_json(datainfo_file_path)
 
-        QMessageBox.information(self, 'Success', 'BIDS converted Successfully')
+        QMessageBox.information(self, 'Success', 'BIDS conversion successful')
 
     def save_channels_tsv(self, file_path):
+        """
+        Save channel metadata to TSV file.
+
+        :param file_path: Output file path
+        :type file_path: str
+        """
         data = {
             'name': self.data_dict['ch_names'],
             'type': self.data_dict['channel_type'],
@@ -329,6 +357,12 @@ class BIDSConverter(QWidget):
         df.to_csv(file_path, sep='\t', index=False)
 
     def save_events_tsv(self, file_path):
+        """
+        Save events metadata to TSV file.
+
+        :param file_path: Output file path
+        :type file_path: str
+        """
         data = {
             'onset': self.data_dict['events'][0],
             'duration': self.data_dict['events'][1],
@@ -338,6 +372,12 @@ class BIDSConverter(QWidget):
         df.to_csv(file_path, sep='\t', index=False)
 
     def save_datainfo_json(self, file_path):
+        """
+        Save dataset metadata to JSON file.
+
+        :param file_path: Output file path
+        :type file_path: str
+        """
         data = {
             'TASKNAME': self.task_name_input.text(),
             'SamplingFrequency': self.data_dict['srate'],
@@ -348,32 +388,28 @@ class BIDSConverter(QWidget):
         save_metadata(data, path=file_path)
 
     def on_srate_changed(self):
-        # Get the new value from the QLineEdit
+        """Update sample rate value."""
         new_srate = self.srate_input.text()
-
-        # Show a confirmation dialog
         reply = QMessageBox.question(self, 'Confirmation',
-                                     f"Are you sure you want to change the sample rate to {new_srate}?",
+                                     f"Change sample rate to {new_srate}?",
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-
-        # If the user confirms, update the label and the dictionary
         if reply == QMessageBox.Yes:
             self.srate_label.setText(new_srate)
             self.data_dict['srate'] = float(new_srate)
 
     def on_montage_changed(self):
+        """Update electrode montage."""
         new_montage = self.montage_input.text()
-
         reply = QMessageBox.question(self, 'Confirmation',
-                                     f"Are you sure you want to change the montage to {new_montage}?",
+                                     f"Change montage to {new_montage}?",
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-
         if reply == QMessageBox.Yes:
             self.montage_label.setText(new_montage)
             self.data_dict['montage'] = new_montage
 
 
 def main():
+    """Launch BIDS converter application."""
     app = QApplication(sys.argv)
     ex = BIDSConverter()
     sys.exit(app.exec_())

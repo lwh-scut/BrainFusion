@@ -9,74 +9,98 @@ import numpy as np
 import pywt
 from scipy.signal import resample_poly, butter, filtfilt, welch
 from scipy.signal import detrend
+from scipy.interpolate import UnivariateSpline
 
 
 def resample_signal(signal, original_fs, target_fs):
     """
-    将信号从原始采样率重采样到目标采样率
+    Resample signal from original to target sampling frequency.
 
-    参数:
-    signal (numpy array): 原始信号
-    original_fs (int): 原始采样率
-    target_fs (int): 目标采样率
-
-    返回:
-    numpy array: 重采样后的信号
+    :param signal: Input signal array
+    :type signal: np.ndarray
+    :param original_fs: Original sampling frequency
+    :type original_fs: int
+    :param target_fs: Target sampling frequency
+    :type target_fs: int
+    :return: Resampled signal array
+    :rtype: np.ndarray
     """
-    # 计算降采样因子
-    gcd = np.gcd(original_fs, target_fs)  # 计算最大公约数
-    up = target_fs // gcd  # 插值因子
-    down = original_fs // gcd  # 抽取因子
+    # Calculate resampling factors
+    gcd = np.gcd(original_fs, target_fs)
+    up = target_fs // gcd
+    down = original_fs // gcd
 
-    # 应用低通滤波器
+    # Apply anti-aliasing filter
     nyquist_rate = 0.5 * original_fs
     cutoff = 0.5 * target_fs
     b, a = butter(4, cutoff / nyquist_rate)
     signal_filtered = filtfilt(b, a, signal)
 
-    # 重采样
-    signal_resampled = resample_poly(signal_filtered, up, down)
-
-    return signal_resampled
+    # Perform resampling
+    return resample_poly(signal_filtered, up, down)
 
 
 def compute_psd(signal, fs=1000, nperseg=1000, fl=1, fh=40):
+    """
+    Compute average power spectral density in frequency band.
+
+    :param signal: Input signal array
+    :type signal: np.ndarray
+    :param fs: Sampling frequency
+    :type fs: int
+    :param nperseg: Segment length for Welch's method
+    :type nperseg: int
+    :param fl: Lower frequency bound
+    :type fl: int
+    :param fh: Upper frequency bound
+    :type fh: int
+    :return: Average PSD value in band
+    :rtype: float
+    """
     f, Pxx = welch(signal, fs=fs, nperseg=nperseg)
-    avg_psd = np.mean(Pxx[(f >= fl) & (f <= fh)])
-    return avg_psd
+    return np.mean(Pxx[(f >= fl) & (f <= fh)])
 
 
 def compute_mean(signal, window_size=None):
+    """
+    Compute signal mean value with optional windowing.
+
+    :param signal: Input signal array
+    :type signal: np.ndarray
+    :param window_size: Size of analysis window
+    :type window_size: int or None
+    :return: Mean values
+    :rtype: list or float
+    """
     if window_size:
         return [np.mean(signal[i:i + window_size]) for i in range(0, len(signal) - window_size + 1, window_size)]
-    else:
-        return np.mean(signal)
+    return np.mean(signal)
 
 
 def signal_detrend(signal):
     """
-    Remove linear trend from the signal.
+    Remove linear trend from signal.
 
-    Parameters:
-    signal (numpy.ndarray): Input ECG signal
-
-    Returns:
-    numpy.ndarray: Detrended signal
+    :param signal: Input signal array
+    :type signal: np.ndarray
+    :return: Detrended signal
+    :rtype: np.ndarray
     """
     return detrend(signal, type='linear')
 
 
 def wavelet_denoising(signal, wavelet='db4', level=1):
     """
-    Perform wavelet denoising on the signal.
+    Apply wavelet-based denoising to signal.
 
-    Parameters:
-    signal (numpy.ndarray): Input ECG signal
-    wavelet (str): Type of wavelet to be used for denoising (default 'db4')
-    level (int): Decomposition level (default 1)
-
-    Returns:
-    numpy.ndarray: Denoised signal
+    :param signal: Input signal array
+    :type signal: np.ndarray
+    :param wavelet: Wavelet type
+    :type wavelet: str
+    :param level: Decomposition level
+    :type level: int
+    :return: Denoised signal
+    :rtype: np.ndarray
     """
     coeffs = pywt.wavedec(signal, wavelet, level=level)
     threshold = np.sqrt(2 * np.log(len(signal))) * np.median(np.abs(coeffs[-level]) / 0.6745)
@@ -84,30 +108,30 @@ def wavelet_denoising(signal, wavelet='db4', level=1):
     return pywt.waverec(new_coeffs, wavelet)
 
 
-from scipy.interpolate import UnivariateSpline
-
-
 def detect_and_interpolate_outliers(data, threshold=3.0):
     """
-    检测并修复异常点。
+    Identify and correct statistical outliers in signal.
 
-    :param data: 输入信号，一维数组
-    :param threshold: 异常点检测的阈值，默认为3倍标准差
-    :return: 修复后的信号
+    :param data: Input signal array
+    :type data: np.ndarray
+    :param threshold: Standard deviation multiplier threshold
+    :type threshold: float
+    :return: Corrected signal array
+    :rtype: np.ndarray
     """
-    # 计算均值和标准差
+    # Calculate statistics
     mean = np.mean(data)
     std = np.std(data)
 
-    # 检测异常点（大于threshold倍标准差）
+    # Identify outliers
     outliers = np.abs(data - mean) > threshold * std
 
     if np.any(outliers):
-        # 找到有效点的索引（非异常点）
+        # Get valid points
         valid_indices = np.where(~outliers)[0]
         valid_data = data[~outliers]
 
-        # 使用样条插值法进行修复
+        # Interpolate outliers
         spline = UnivariateSpline(valid_indices, valid_data, k=3, s=0)
         data[outliers] = spline(np.where(outliers)[0])
 

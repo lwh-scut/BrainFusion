@@ -14,6 +14,8 @@ copyright = '2025, mini-lab'
 author = 'mini-lab'
 release = 'v0.1.0'
 
+nitpicky = True
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
@@ -30,7 +32,12 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
-
+# 确保包含所有子模块
+autodoc_default_options = {
+    'members': True,
+    'undoc-members': True,
+    'show-inheritance': True,
+}
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
