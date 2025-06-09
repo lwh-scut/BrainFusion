@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrainFusion.statistic package &mdash; BrainFusion v0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=fa47ad08"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="BrainFusion.viewer package" href="BrainFusion.viewer.html" />
+    <link rel="prev" title="BrainFusion.utils package" href="BrainFusion.utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BrainFusion
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.io.html">BrainFusion.io package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.pipeLine.html">BrainFusion.pipeLine package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.utils.html">BrainFusion.utils package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BrainFusion.statistic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.statistic.significance_test">BrainFusion.statistic.significance_test module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.significance_test.calculate_significance"><code class="docutils literal notranslate"><span class="pre">calculate_significance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.significance_test.multiple_comparison_correction"><code class="docutils literal notranslate"><span class="pre">multiple_comparison_correction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.statistic.statistical_analysis_dialog">BrainFusion.statistic.statistical_analysis_dialog module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.ChannelSelectionDialog"><code class="docutils literal notranslate"><span class="pre">ChannelSelectionDialog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.ChannelSelectionDialog.get_selected_channels"><code class="docutils literal notranslate"><span class="pre">ChannelSelectionDialog.get_selected_channels()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.GroupDialog"><code class="docutils literal notranslate"><span class="pre">GroupDialog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.GroupDialog.get_group_data"><code class="docutils literal notranslate"><span class="pre">GroupDialog.get_group_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget"><code class="docutils literal notranslate"><span class="pre">MatplotlibWidget</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot"><code class="docutils literal notranslate"><span class="pre">MatplotlibWidget.plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot_data"><code class="docutils literal notranslate"><span class="pre">MatplotlibWidget.plot_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot_default"><code class="docutils literal notranslate"><span class="pre">MatplotlibWidget.plot_default()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog"><code class="docutils literal notranslate"><span class="pre">StatisticalAnalysisDialog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.add_group"><code class="docutils literal notranslate"><span class="pre">StatisticalAnalysisDialog.add_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.export_results"><code class="docutils literal notranslate"><span class="pre">StatisticalAnalysisDialog.export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.generate_visualization"><code class="docutils literal notranslate"><span class="pre">StatisticalAnalysisDialog.generate_visualization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.modify_group"><code class="docutils literal notranslate"><span class="pre">StatisticalAnalysisDialog.modify_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.run_analysis"><code class="docutils literal notranslate"><span class="pre">StatisticalAnalysisDialog.run_analysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.validate_groups"><code class="docutils literal notranslate"><span class="pre">StatisticalAnalysisDialog.validate_groups()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.VisualisationSettingsDialog"><code class="docutils literal notranslate"><span class="pre">VisualisationSettingsDialog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.VisualisationSettingsDialog.get_settings"><code class="docutils literal notranslate"><span class="pre">VisualisationSettingsDialog.get_settings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.convert_to_significance_dict"><code class="docutils literal notranslate"><span class="pre">convert_to_significance_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_analysis_dialog.get_feature"><code class="docutils literal notranslate"><span class="pre">get_feature()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.statistic.statistical_plot">BrainFusion.statistic.statistical_plot module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_plot.DensityHistogramWindow"><code class="docutils literal notranslate"><span class="pre">DensityHistogramWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_plot.DensityHistogramWindow.plot_density_histogram"><code class="docutils literal notranslate"><span class="pre">DensityHistogramWindow.plot_density_histogram()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_plot.ScatterPlotWindow"><code class="docutils literal notranslate"><span class="pre">ScatterPlotWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_plot.ScatterPlotWindow.plot_scatter"><code class="docutils literal notranslate"><span class="pre">ScatterPlotWindow.plot_scatter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_plot.SignificanceBoxPlotWindow"><code class="docutils literal notranslate"><span class="pre">SignificanceBoxPlotWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_plot.SignificanceBoxPlotWindow.plot_boxplot_with_significance"><code class="docutils literal notranslate"><span class="pre">SignificanceBoxPlotWindow.plot_boxplot_with_significance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.statistic.statistical_plot.SignificanceViolinPlotWindow"><code class="docutils literal notranslate"><span class="pre">SignificanceViolinPlotWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#BrainFusion.statistic.statistical_plot.SignificanceViolinPlotWindow.plot_violin_with_significance"><code class="docutils literal notranslate"><span class="pre">SignificanceViolinPlotWindow.plot_violin_with_significance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.statistic">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.viewer.html">BrainFusion.viewer package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BrainFusion</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BrainFusion.statistic package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/BrainFusion.statistic.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="brainfusion-statistic-package">
+<h1>BrainFusion.statistic package<a class="headerlink" href="#brainfusion-statistic-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-BrainFusion.statistic.significance_test">
+<span id="brainfusion-statistic-significance-test-module"></span><h2>BrainFusion.statistic.significance_test module<a class="headerlink" href="#module-BrainFusion.statistic.significance_test" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.statistic.significance_test.calculate_significance">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.significance_test.</span></span><span class="sig-name descname"><span class="pre">calculate_significance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'t-test'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.significance_test.calculate_significance" title="Link to this definition"></a></dt>
+<dd><p>Perform statistical tests between group means or distributions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> (<em>dict</em>) – Dictionary containing data groups with group names as keys</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – Statistical method to use (default: “t-test”)</p></li>
+<li><p><strong>paired</strong> (<em>bool</em>) – Flag for paired/dependent samples (default: False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of results containing test statistics and p-values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – For insufficient groups or invalid method names</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.statistic.significance_test.multiple_comparison_correction">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.significance_test.</span></span><span class="sig-name descname"><span class="pre">multiple_comparison_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correction_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bonferroni'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.significance_test.multiple_comparison_correction" title="Link to this definition"></a></dt>
+<dd><p>Apply multiple comparison correction to raw p-values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>results</strong> (<em>list</em>) – Output from calculate_significance function</p></li>
+<li><p><strong>correction_method</strong> (<em>str</em>) – Correction method (default: “bonferroni”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Results with corrected p-values and significance flags</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.statistic.statistical_analysis_dialog">
+<span id="brainfusion-statistic-statistical-analysis-dialog-module"></span><h2>BrainFusion.statistic.statistical_analysis_dialog module<a class="headerlink" href="#module-BrainFusion.statistic.statistical_analysis_dialog" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.ChannelSelectionDialog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_analysis_dialog.</span></span><span class="sig-name descname"><span class="pre">ChannelSelectionDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">available_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.ChannelSelectionDialog" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Dialog for selecting data channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>available_channels</strong> (<em>list</em>) – List of available channel names</p></li>
+<li><p><strong>selected_channels</strong> (<em>list</em>) – Pre-selected channel names</p></li>
+<li><p><strong>parent</strong> (<em>QWidget</em>) – Parent widget</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.ChannelSelectionDialog.get_selected_channels">
+<span class="sig-name descname"><span class="pre">get_selected_channels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.ChannelSelectionDialog.get_selected_channels" title="Link to this definition"></a></dt>
+<dd><p>Retrieve selected channel names.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.GroupDialog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_analysis_dialog.</span></span><span class="sig-name descname"><span class="pre">GroupDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.GroupDialog" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Dialog window for creating or editing statistical groups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>QWidget</em>) – Parent widget</p></li>
+<li><p><strong>group_name</strong> (<em>str</em>) – Initial group name</p></li>
+<li><p><strong>folder_path</strong> (<em>str</em>) – Initial folder path</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.GroupDialog.get_group_data">
+<span class="sig-name descname"><span class="pre">get_group_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.GroupDialog.get_group_data" title="Link to this definition"></a></dt>
+<dd><p>Retrieve input group configuration data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_analysis_dialog.</span></span><span class="sig-name descname"><span class="pre">MatplotlibWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Embedded widget for displaying Matplotlib visualizations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_ticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blue'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot" title="Link to this definition"></a></dt>
+<dd><p>Render customized boxplot visualization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em>) – Input dataset for visualization</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – Plot title text</p></li>
+<li><p><strong>y_label</strong> (<em>str</em>) – Y-axis label text</p></li>
+<li><p><strong>x_label</strong> (<em>str</em>) – X-axis label text</p></li>
+<li><p><strong>legend</strong> (<em>list</em>) – Legend items list</p></li>
+<li><p><strong>x_ticks</strong> (<em>list</em>) – X-axis tick labels</p></li>
+<li><p><strong>y_range</strong> (<em>tuple</em>) – Y-axis range limits</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Primary boxplot color</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot_data">
+<span class="sig-name descname"><span class="pre">plot_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot_data" title="Link to this definition"></a></dt>
+<dd><p>Generate NVC boxplot visualization for left vs right hand MI.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot_default">
+<span class="sig-name descname"><span class="pre">plot_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.MatplotlibWidget.plot_default" title="Link to this definition"></a></dt>
+<dd><p>Generate default boxplot visualization with random data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_analysis_dialog.</span></span><span class="sig-name descname"><span class="pre">StatisticalAnalysisDialog</span></span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
+<p>Dialog window for performing statistical analyses and visualizations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.add_group">
+<span class="sig-name descname"><span class="pre">add_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.add_group" title="Link to this definition"></a></dt>
+<dd><p>Open dialog to create new analysis group.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.export_results">
+<span class="sig-name descname"><span class="pre">export_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.export_results" title="Link to this definition"></a></dt>
+<dd><p>Export analysis results to external format.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.generate_visualization">
+<span class="sig-name descname"><span class="pre">generate_visualization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.generate_visualization" title="Link to this definition"></a></dt>
+<dd><p>Generate selected visualization type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.modify_group">
+<span class="sig-name descname"><span class="pre">modify_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.modify_group" title="Link to this definition"></a></dt>
+<dd><p>Open dialog to edit existing analysis group.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.run_analysis">
+<span class="sig-name descname"><span class="pre">run_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.run_analysis" title="Link to this definition"></a></dt>
+<dd><p>Execute statistical analysis on selected features.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.validate_groups">
+<span class="sig-name descname"><span class="pre">validate_groups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.StatisticalAnalysisDialog.validate_groups" title="Link to this definition"></a></dt>
+<dd><p>Validate and load group datasets.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.VisualisationSettingsDialog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_analysis_dialog.</span></span><span class="sig-name descname"><span class="pre">VisualisationSettingsDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Default</span> <span class="pre">Title'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Y</span> <span class="pre">Axis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'X</span> <span class="pre">Axis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_ticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#ff0000'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.VisualisationSettingsDialog" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Dialog for customizing plot visualization parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – Current plot title</p></li>
+<li><p><strong>y_label</strong> (<em>str</em>) – Current Y-axis label</p></li>
+<li><p><strong>x_label</strong> (<em>str</em>) – Current X-axis label</p></li>
+<li><p><strong>legend</strong> (<em>list</em>) – Current legend items</p></li>
+<li><p><strong>x_ticks</strong> (<em>list</em>) – Current X-axis tick labels</p></li>
+<li><p><strong>y_range</strong> (<em>tuple</em>) – Current Y-axis range</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Current primary color</p></li>
+<li><p><strong>parent</strong> (<em>QWidget</em>) – Parent widget</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.VisualisationSettingsDialog.get_settings">
+<span class="sig-name descname"><span class="pre">get_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.VisualisationSettingsDialog.get_settings" title="Link to this definition"></a></dt>
+<dd><p>Retrieve visualization settings from dialog inputs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.convert_to_significance_dict">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_analysis_dialog.</span></span><span class="sig-name descname"><span class="pre">convert_to_significance_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.convert_to_significance_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert significance test results to a comparison dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<em>list</em>) – Significance test result list</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary mapping group pairs to corrected p-values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_analysis_dialog.get_feature">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_analysis_dialog.</span></span><span class="sig-name descname"><span class="pre">get_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_analysis_dialog.get_feature" title="Link to this definition"></a></dt>
+<dd><p>Extract specific feature data from a feature dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_dict</strong> (<em>dict</em>) – Dictionary containing feature data</p></li>
+<li><p><strong>channel_name</strong> (<em>str</em>) – Target channel name (optional)</p></li>
+<li><p><strong>feature_name</strong> (<em>str</em>) – Target feature name (required)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Feature values for specified channel/feature</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – For invalid channel or feature names</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.statistic.statistical_plot">
+<span id="brainfusion-statistic-statistical-plot-module"></span><h2>BrainFusion.statistic.statistical_plot module<a class="headerlink" href="#module-BrainFusion.statistic.statistical_plot" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_plot.DensityHistogramWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_plot.</span></span><span class="sig-name descname"><span class="pre">DensityHistogramWindow</span></span><a class="headerlink" href="#BrainFusion.statistic.statistical_plot.DensityHistogramWindow" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
+<p>PyQt5-based window for visualizing density histograms.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_plot.DensityHistogramWindow.plot_density_histogram">
+<span class="sig-name descname"><span class="pre">plot_density_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_plot.DensityHistogramWindow.plot_density_histogram" title="Link to this definition"></a></dt>
+<dd><p>Render group data as density histograms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_dict</strong> (<em>dict</em>) – Dictionary of group data values</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_plot.ScatterPlotWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_plot.</span></span><span class="sig-name descname"><span class="pre">ScatterPlotWindow</span></span><a class="headerlink" href="#BrainFusion.statistic.statistical_plot.ScatterPlotWindow" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
+<p>PyQt5-based window for visualizing group data using scatter plots.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_plot.ScatterPlotWindow.plot_scatter">
+<span class="sig-name descname"><span class="pre">plot_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_plot.ScatterPlotWindow.plot_scatter" title="Link to this definition"></a></dt>
+<dd><p>Render group data as a scatter plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_dict</strong> (<em>dict</em>) – Dictionary of group data values</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_plot.SignificanceBoxPlotWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_plot.</span></span><span class="sig-name descname"><span class="pre">SignificanceBoxPlotWindow</span></span><a class="headerlink" href="#BrainFusion.statistic.statistical_plot.SignificanceBoxPlotWindow" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
+<p>PyQt5-based window for boxplots with significance markers.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_plot.SignificanceBoxPlotWindow.plot_boxplot_with_significance">
+<span class="sig-name descname"><span class="pre">plot_boxplot_with_significance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">significance_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_plot.SignificanceBoxPlotWindow.plot_boxplot_with_significance" title="Link to this definition"></a></dt>
+<dd><p>Render boxplots with statistical significance markers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> (<em>dict</em>) – Dictionary of group data values</p></li>
+<li><p><strong>significance_dict</strong> (<em>dict</em>) – Significance mappings between groups</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_plot.SignificanceViolinPlotWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.statistic.statistical_plot.</span></span><span class="sig-name descname"><span class="pre">SignificanceViolinPlotWindow</span></span><a class="headerlink" href="#BrainFusion.statistic.statistical_plot.SignificanceViolinPlotWindow" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
+<p>PyQt5-based window for violin plots with significance markers.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.statistic.statistical_plot.SignificanceViolinPlotWindow.plot_violin_with_significance">
+<span class="sig-name descname"><span class="pre">plot_violin_with_significance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">significance_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.statistic.statistical_plot.SignificanceViolinPlotWindow.plot_violin_with_significance" title="Link to this definition"></a></dt>
+<dd><p>Render violin plots with statistical significance markers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> (<em>dict</em>) – Dictionary of group data values</p></li>
+<li><p><strong>significance_dict</strong> (<em>dict</em>) – Significance mappings between groups</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.statistic">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-BrainFusion.statistic" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="BrainFusion.utils.html" class="btn btn-neutral float-left" title="BrainFusion.utils package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="BrainFusion.viewer.html" class="btn btn-neutral float-right" title="BrainFusion.viewer package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, mini-lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1482 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrainFusion.io package &mdash; BrainFusion v0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=fa47ad08"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="BrainFusion.io.neuracle_lib package" href="BrainFusion.io.neuracle_lib.html" />
+    <link rel="prev" title="BrainFusion documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BrainFusion
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BrainFusion.io package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html">BrainFusion.io.neuracle_lib package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.io.File_IO">BrainFusion.io.File_IO module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.array_to_string"><code class="docutils literal notranslate"><span class="pre">array_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.check_data_dict"><code class="docutils literal notranslate"><span class="pre">check_data_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.convert_to_list"><code class="docutils literal notranslate"><span class="pre">convert_to_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.create_data_dict"><code class="docutils literal notranslate"><span class="pre">create_data_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.create_standard_bdf_file"><code class="docutils literal notranslate"><span class="pre">create_standard_bdf_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.dict_to_bdf"><code class="docutils literal notranslate"><span class="pre">dict_to_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.dict_to_snirf"><code class="docutils literal notranslate"><span class="pre">dict_to_snirf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.find_bids_files"><code class="docutils literal notranslate"><span class="pre">find_bids_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_bdf"><code class="docutils literal notranslate"><span class="pre">read_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_csv"><code class="docutils literal notranslate"><span class="pre">read_csv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_ecg"><code class="docutils literal notranslate"><span class="pre">read_ecg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_edf"><code class="docutils literal notranslate"><span class="pre">read_edf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_file"><code class="docutils literal notranslate"><span class="pre">read_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_file_by_mne"><code class="docutils literal notranslate"><span class="pre">read_file_by_mne()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_file_by_path"><code class="docutils literal notranslate"><span class="pre">read_file_by_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_file_by_qt"><code class="docutils literal notranslate"><span class="pre">read_file_by_qt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_json"><code class="docutils literal notranslate"><span class="pre">read_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_mat"><code class="docutils literal notranslate"><span class="pre">read_mat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_minilab_bdf"><code class="docutils literal notranslate"><span class="pre">read_minilab_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_minilab_snirf"><code class="docutils literal notranslate"><span class="pre">read_minilab_snirf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_neuracle_bdf"><code class="docutils literal notranslate"><span class="pre">read_neuracle_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_nirs"><code class="docutils literal notranslate"><span class="pre">read_nirs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_npy"><code class="docutils literal notranslate"><span class="pre">read_npy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_one_bids_file"><code class="docutils literal notranslate"><span class="pre">read_one_bids_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_snirf"><code class="docutils literal notranslate"><span class="pre">read_snirf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_txt"><code class="docutils literal notranslate"><span class="pre">read_txt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.read_xlsx"><code class="docutils literal notranslate"><span class="pre">read_xlsx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.reduce_dimensions"><code class="docutils literal notranslate"><span class="pre">reduce_dimensions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.remove_keys"><code class="docutils literal notranslate"><span class="pre">remove_keys()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_csv"><code class="docutils literal notranslate"><span class="pre">save_csv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_feature"><code class="docutils literal notranslate"><span class="pre">save_feature()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_file"><code class="docutils literal notranslate"><span class="pre">save_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_json"><code class="docutils literal notranslate"><span class="pre">save_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_mat"><code class="docutils literal notranslate"><span class="pre">save_mat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_metadata"><code class="docutils literal notranslate"><span class="pre">save_metadata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_npy"><code class="docutils literal notranslate"><span class="pre">save_npy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_prepare"><code class="docutils literal notranslate"><span class="pre">save_prepare()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.File_IO.save_txt"><code class="docutils literal notranslate"><span class="pre">save_txt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.io.readMinilabDataset">BrainFusion.io.readMinilabDataset module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.add_event_to_minilab_bdf"><code class="docutils literal notranslate"><span class="pre">add_event_to_minilab_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.add_events_to_bdf"><code class="docutils literal notranslate"><span class="pre">add_events_to_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.add_events_to_snirf"><code class="docutils literal notranslate"><span class="pre">add_events_to_snirf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.add_pos_to_minilab_snirf"><code class="docutils literal notranslate"><span class="pre">add_pos_to_minilab_snirf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.combine_data_and_evt"><code class="docutils literal notranslate"><span class="pre">combine_data_and_evt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.load_events_from_excel"><code class="docutils literal notranslate"><span class="pre">load_events_from_excel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.read_minilab_bdf"><code class="docutils literal notranslate"><span class="pre">read_minilab_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.read_minilab_snirf"><code class="docutils literal notranslate"><span class="pre">read_minilab_snirf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.save_events_to_excel"><code class="docutils literal notranslate"><span class="pre">save_events_to_excel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.save_events_to_excel_from_bdf"><code class="docutils literal notranslate"><span class="pre">save_events_to_excel_from_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readMinilabDataset.save_events_to_excel_from_snirf"><code class="docutils literal notranslate"><span class="pre">save_events_to_excel_from_snirf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.io.readTUBerlinBCI">BrainFusion.io.readTUBerlinBCI module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.convert_dataset_to_bdf"><code class="docutils literal notranslate"><span class="pre">convert_dataset_to_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.convert_dataset_to_brainfusion_eeg"><code class="docutils literal notranslate"><span class="pre">convert_dataset_to_brainfusion_eeg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.convert_dataset_to_brainfusion_nirs"><code class="docutils literal notranslate"><span class="pre">convert_dataset_to_brainfusion_nirs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.convert_dataset_to_snirf"><code class="docutils literal notranslate"><span class="pre">convert_dataset_to_snirf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_eeg_to_brainfusion"><code class="docutils literal notranslate"><span class="pre">convert_tu_berlin_eeg_to_brainfusion()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_nirs_to_brainfusion"><code class="docutils literal notranslate"><span class="pre">convert_tu_berlin_nirs_to_brainfusion()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_to_bdf"><code class="docutils literal notranslate"><span class="pre">convert_tu_berlin_to_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_to_snirf"><code class="docutils literal notranslate"><span class="pre">convert_tu_berlin_to_snirf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.filter_optode_positions"><code class="docutils literal notranslate"><span class="pre">filter_optode_positions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.generate_time_series"><code class="docutils literal notranslate"><span class="pre">generate_time_series()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.interleave_channels"><code class="docutils literal notranslate"><span class="pre">interleave_channels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.read_tu_berlin_bci_eeg_data"><code class="docutils literal notranslate"><span class="pre">read_tu_berlin_bci_eeg_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.read_tu_berlin_bci_nirs_data"><code class="docutils literal notranslate"><span class="pre">read_tu_berlin_bci_nirs_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.readTUBerlinBCI.remove_dtype"><code class="docutils literal notranslate"><span class="pre">remove_dtype()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.io.snirf_io">BrainFusion.io.snirf_io module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.snirf_io.create_snirf_file"><code class="docutils literal notranslate"><span class="pre">create_snirf_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BrainFusion.io.snirf_io.read_snirf_file"><code class="docutils literal notranslate"><span class="pre">read_snirf_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-BrainFusion.io">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.pipeLine.html">BrainFusion.pipeLine package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.utils.html">BrainFusion.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.statistic.html">BrainFusion.statistic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.viewer.html">BrainFusion.viewer package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BrainFusion</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BrainFusion.io package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/BrainFusion.io.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="brainfusion-io-package">
+<h1>BrainFusion.io package<a class="headerlink" href="#brainfusion-io-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html">BrainFusion.io.neuracle_lib package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#module-BrainFusion.io.neuracle_lib.dataServer">BrainFusion.io.neuracle_lib.dataServer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread"><code class="docutils literal notranslate"><span class="pre">DataServerThread</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.GetBufferData"><code class="docutils literal notranslate"><span class="pre">DataServerThread.GetBufferData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.GetDataLenCount"><code class="docutils literal notranslate"><span class="pre">DataServerThread.GetDataLenCount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.ResetDataLenCount"><code class="docutils literal notranslate"><span class="pre">DataServerThread.ResetDataLenCount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.ResetTriggerChanofBuff"><code class="docutils literal notranslate"><span class="pre">DataServerThread.ResetTriggerChanofBuff()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.connect"><code class="docutils literal notranslate"><span class="pre">DataServerThread.connect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.parseData"><code class="docutils literal notranslate"><span class="pre">DataServerThread.parseData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.read_thread"><code class="docutils literal notranslate"><span class="pre">DataServerThread.read_thread()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.run"><code class="docutils literal notranslate"><span class="pre">DataServerThread.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.sock"><code class="docutils literal notranslate"><span class="pre">DataServerThread.sock</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.stop"><code class="docutils literal notranslate"><span class="pre">DataServerThread.stop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.RingBuffer"><code class="docutils literal notranslate"><span class="pre">RingBuffer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.RingBuffer.appendBuffer"><code class="docutils literal notranslate"><span class="pre">RingBuffer.appendBuffer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.RingBuffer.getData"><code class="docutils literal notranslate"><span class="pre">RingBuffer.getData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.dataServer.RingBuffer.resetBuffer"><code class="docutils literal notranslate"><span class="pre">RingBuffer.resetBuffer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#module-BrainFusion.io.neuracle_lib.readbdfdata">BrainFusion.io.neuracle_lib.readbdfdata module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.readbdfdata.read_annotations_bdf"><code class="docutils literal notranslate"><span class="pre">read_annotations_bdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.readbdfdata.readbdfdata"><code class="docutils literal notranslate"><span class="pre">readbdfdata()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#module-BrainFusion.io.neuracle_lib.triggerBox">BrainFusion.io.neuracle_lib.triggerBox module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo"><code class="docutils literal notranslate"><span class="pre">PackageGetDeviceInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo.command"><code class="docutils literal notranslate"><span class="pre">PackageGetDeviceInfo.command</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo.frame"><code class="docutils literal notranslate"><span class="pre">PackageGetDeviceInfo.frame</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara"><code class="docutils literal notranslate"><span class="pre">PackageGetSensorPara</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara.frame"><code class="docutils literal notranslate"><span class="pre">PackageGetSensorPara.frame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara.sensorInfo"><code class="docutils literal notranslate"><span class="pre">PackageGetSensorPara.sensorInfo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo"><code class="docutils literal notranslate"><span class="pre">PackageSensorInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo.sensorNum"><code class="docutils literal notranslate"><span class="pre">PackageSensorInfo.sensorNum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo.sensorType"><code class="docutils literal notranslate"><span class="pre">PackageSensorInfo.sensorType</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara"><code class="docutils literal notranslate"><span class="pre">PackageSensorPara</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.Edge"><code class="docutils literal notranslate"><span class="pre">PackageSensorPara.Edge</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.EventData"><code class="docutils literal notranslate"><span class="pre">PackageSensorPara.EventData</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.OutputChannel"><code class="docutils literal notranslate"><span class="pre">PackageSensorPara.OutputChannel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.Threshold"><code class="docutils literal notranslate"><span class="pre">PackageSensorPara.Threshold</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.TriggerToBeOut"><code class="docutils literal notranslate"><span class="pre">PackageSensorPara.TriggerToBeOut</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara"><code class="docutils literal notranslate"><span class="pre">PackageSetSensorPara</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.frame"><code class="docutils literal notranslate"><span class="pre">PackageSetSensorPara.frame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.sensorInfo"><code class="docutils literal notranslate"><span class="pre">PackageSetSensorPara.sensorInfo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.sensorPara"><code class="docutils literal notranslate"><span class="pre">PackageSetSensorPara.sensorPara</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame"><code class="docutils literal notranslate"><span class="pre">PackageTriggerBoxBaseFrame</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.deviceID"><code class="docutils literal notranslate"><span class="pre">PackageTriggerBoxBaseFrame.deviceID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.functionID"><code class="docutils literal notranslate"><span class="pre">PackageTriggerBoxBaseFrame.functionID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.payload"><code class="docutils literal notranslate"><span class="pre">PackageTriggerBoxBaseFrame.payload</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox"><code class="docutils literal notranslate"><span class="pre">TriggerBox</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.check_online"><code class="docutils literal notranslate"><span class="pre">TriggerBox.check_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.closeSerial"><code class="docutils literal notranslate"><span class="pre">TriggerBox.closeSerial()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDDeviceInfoGet"><code class="docutils literal notranslate"><span class="pre">TriggerBox.functionIDDeviceInfoGet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDDeviceNameGet"><code class="docutils literal notranslate"><span class="pre">TriggerBox.functionIDDeviceNameGet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDError"><code class="docutils literal notranslate"><span class="pre">TriggerBox.functionIDError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDOutputEventData"><code class="docutils literal notranslate"><span class="pre">TriggerBox.functionIDOutputEventData</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorInfoGet"><code class="docutils literal notranslate"><span class="pre">TriggerBox.functionIDSensorInfoGet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorParaGet"><code class="docutils literal notranslate"><span class="pre">TriggerBox.functionIDSensorParaGet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorParaSet"><code class="docutils literal notranslate"><span class="pre">TriggerBox.functionIDSensorParaSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorSampleGet"><code class="docutils literal notranslate"><span class="pre">TriggerBox.functionIDSensorSampleGet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_device_info"><code class="docutils literal notranslate"><span class="pre">TriggerBox.get_device_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_device_name"><code class="docutils literal notranslate"><span class="pre">TriggerBox.get_device_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_info"><code class="docutils literal notranslate"><span class="pre">TriggerBox.get_sensor_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_para"><code class="docutils literal notranslate"><span class="pre">TriggerBox.get_sensor_para()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_sample"><code class="docutils literal notranslate"><span class="pre">TriggerBox.get_sensor_sample()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.init_audioSensor"><code class="docutils literal notranslate"><span class="pre">TriggerBox.init_audioSensor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.init_lightSensor"><code class="docutils literal notranslate"><span class="pre">TriggerBox.init_lightSensor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.output_event_data"><code class="docutils literal notranslate"><span class="pre">TriggerBox.output_event_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.read"><code class="docutils literal notranslate"><span class="pre">TriggerBox.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.refresh_serial_list"><code class="docutils literal notranslate"><span class="pre">TriggerBox.refresh_serial_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.send"><code class="docutils literal notranslate"><span class="pre">TriggerBox.send()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeAll"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeAll</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeAmbientlight"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeAmbientlight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeDebug"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeDebug</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeDigitalIN"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeDigitalIN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeHumidity"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeHumidity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeKey"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeKey</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeLight"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeLight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeLineIN"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeLineIN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeMap"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeMap</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeMic"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeMic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeTemperature"><code class="docutils literal notranslate"><span class="pre">TriggerBox.sensorTypeTemperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_audioSensor_threshold"><code class="docutils literal notranslate"><span class="pre">TriggerBox.set_audioSensor_threshold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_event_data"><code class="docutils literal notranslate"><span class="pre">TriggerBox.set_event_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_lightSensor_threshold"><code class="docutils literal notranslate"><span class="pre">TriggerBox.set_lightSensor_threshold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_sensor_para"><code class="docutils literal notranslate"><span class="pre">TriggerBox.set_sensor_para()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.validate_device"><code class="docutils literal notranslate"><span class="pre">TriggerBox.validate_device()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.neuracle_lib.html#module-BrainFusion.io.neuracle_lib">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-BrainFusion.io.File_IO">
+<span id="brainfusion-io-file-io-module"></span><h2>BrainFusion.io.File_IO module<a class="headerlink" href="#module-BrainFusion.io.File_IO" title="Link to this heading"></a></h2>
+<p>File Input/Output Module</p>
+<p>Provides functions for reading, writing and converting various biomedical file formats
+including EEG, ECG, fNIRS and more.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.array_to_string">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">array_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.array_to_string" title="Link to this definition"></a></dt>
+<dd><p>Converts a NumPy array to string representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>array</strong> (<em>np.ndarray</em>) – Input array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>String representation of array</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.check_data_dict">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">check_data_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.check_data_dict" title="Link to this definition"></a></dt>
+<dd><p>Validates the structure of a data dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_dict</strong> (<em>dict</em>) – Data dictionary to validate</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if valid</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If input is not a dictionary</p></li>
+<li><p><strong>ValueError</strong> – If required fields are missing or invalid</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.convert_to_list">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">convert_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.convert_to_list" title="Link to this definition"></a></dt>
+<dd><p>Converts numpy arrays to Python lists recursively</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>any</em>) – Input data (array or nested structure)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Converted data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list or primitive</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.create_data_dict">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">create_data_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nchan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eeg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">montage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_filestyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.create_data_dict" title="Link to this definition"></a></dt>
+<dd><p>Creates a standardized data dictionary for biomedical signals</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.ndarray</em><em> or </em><em>list</em>) – Signal data array (channels x time points)</p></li>
+<li><p><strong>srate</strong> (<em>float</em>) – Sampling rate in Hz</p></li>
+<li><p><strong>nchan</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of channels, defaults to None (inferred from data)</p></li>
+<li><p><strong>ch_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Channel names, defaults to None</p></li>
+<li><p><strong>events</strong> (<em>list</em><em>[</em><em>list</em><em>]</em><em>, </em><em>optional</em>) – Event markers in format [[time, duration, label], …], defaults to None</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Data type (‘eeg’, ‘ecg’, ‘fnirs’, etc.), defaults to ‘eeg’</p></li>
+<li><p><strong>montage</strong> (<em>str</em><em>, </em><em>optional</em>) – Sensor montage information, defaults to None</p></li>
+<li><p><strong>is_save</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save the data dictionary, defaults to False</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to save file, defaults to None</p></li>
+<li><p><strong>save_filestyle</strong> (<em>str</em><em>, </em><em>optional</em>) – File format for saving (‘mat’, ‘csv’, ‘json’, etc.), defaults to ‘mat’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Standardized data dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.create_standard_bdf_file">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">create_standard_bdf_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">physical_mins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">physical_maxs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digital_mins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digital_maxs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">technician</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equipment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patient_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patient_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">birthdate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transducers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">physical_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.create_standard_bdf_file" title="Link to this definition"></a></dt>
+<dd><p>Creates a standard BDF file from provided data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<em>str</em>) – Output filename</p></li>
+<li><p><strong>n_channels</strong> (<em>int</em>) – Number of channels</p></li>
+<li><p><strong>signals</strong> (<em>np.ndarray</em>) – Signal data (n_channels x n_samples)</p></li>
+<li><p><strong>channel_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of channel names</p></li>
+<li><p><strong>physical_mins</strong> (<em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Physical minimum values, defaults to [-10000]*n_channels</p></li>
+<li><p><strong>physical_maxs</strong> (<em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Physical maximum values, defaults to [10000]*n_channels</p></li>
+<li><p><strong>digital_mins</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Digital minimum values, defaults to [-32768]*n_channels</p></li>
+<li><p><strong>digital_maxs</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Digital maximum values, defaults to [32767]*n_channels</p></li>
+<li><p><strong>sampling_frequency</strong> (<em>float</em><em>, </em><em>optional</em>) – Sampling rate, defaults to 256</p></li>
+<li><p><strong>technician</strong> (<em>str</em><em>, </em><em>optional</em>) – Technician name, defaults to ‘’</p></li>
+<li><p><strong>equipment</strong> (<em>str</em><em>, </em><em>optional</em>) – Equipment description, defaults to ‘’</p></li>
+<li><p><strong>patient_code</strong> (<em>str</em><em>, </em><em>optional</em>) – Patient code, defaults to ‘’</p></li>
+<li><p><strong>patient_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Patient name, defaults to ‘’</p></li>
+<li><p><strong>birthdate</strong> (<em>str</em><em>, </em><em>optional</em>) – Patient birthdate, defaults to None</p></li>
+<li><p><strong>admin_code</strong> (<em>str</em><em>, </em><em>optional</em>) – Administration code, defaults to ‘’</p></li>
+<li><p><strong>annotations</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em><em>, </em><em>optional</em>) – Event annotations [(onset, duration, description)], defaults to None</p></li>
+<li><p><strong>transducers</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Transducer types, defaults to [‘EEG Electrode’]*n_channels</p></li>
+<li><p><strong>physical_dimensions</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Physical dimensions, defaults to [‘uV’]*n_channels</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.dict_to_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">dict_to_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.dict_to_bdf" title="Link to this definition"></a></dt>
+<dd><p>Converts a data dictionary to BDF file format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> (<em>dict</em>) – Data dictionary with required fields</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>) – Output file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.dict_to_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">dict_to_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.dict_to_snirf" title="Link to this definition"></a></dt>
+<dd><p>Converts a data dictionary to SNIRF file format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> (<em>dict</em>) – Data dictionary with required fields</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>) – Output file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.find_bids_files">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">find_bids_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.find_bids_files" title="Link to this definition"></a></dt>
+<dd><p>Scans a root folder for BIDS-formatted data files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>root_folder</strong> (<em>str</em>) – Root directory to scan</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of found data files with associated label files</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eeg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">montage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_bdf" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a BDF file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to BDF file, defaults to None (opens dialog)</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Data type (‘eeg’, ‘ecg’, etc.), defaults to ‘eeg’</p></li>
+<li><p><strong>montage</strong> (<em>str</em><em>, </em><em>optional</em>) – Sensor montage information, defaults to None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_csv">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_csv" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a CSV file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to CSV file, defaults to None (opens dialog)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_ecg">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_ecg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_ecg" title="Link to this definition"></a></dt>
+<dd><p>Reads data from an ECG (ISHNE Holter) file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Path to ECG file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ECG data dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_edf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_edf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_edf" title="Link to this definition"></a></dt>
+<dd><p>Reads data from an EDF file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to EDF file, defaults to None (opens dialog)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_file">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_file" title="Link to this definition"></a></dt>
+<dd><p>Reads a file using Tkinter file dialog</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Predefined file path, defaults to None (opens dialog)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_file_by_mne">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_file_by_mne</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_file_by_mne" title="Link to this definition"></a></dt>
+<dd><p>Reads a file using MNE-Python via Qt dialog</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget</strong> (<em>QWidget</em>) – Parent Qt widget</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Predefined file path, defaults to None (opens dialog)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>MNE Raw object and file path</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(mne.io.Raw, str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_file_by_path">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_file_by_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_file_by_path" title="Link to this definition"></a></dt>
+<dd><p>Reads a file from a given path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>tuple</em><em>, </em><em>optional</em>) – File path or tuple of paths, defaults to None</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_file_by_qt">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_file_by_qt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_file_by_qt" title="Link to this definition"></a></dt>
+<dd><p>Reads a file using a Qt file dialog</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget</strong> (<em>QWidget</em>) – Parent Qt widget</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Predefined file path, defaults to None (opens dialog)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data and file path</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(object, str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_json">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_json" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a JSON file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to JSON file, defaults to None (opens dialog)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_mat">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_mat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_mat" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a MATLAB .mat file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to .mat file, defaults to None (opens dialog)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_minilab_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_minilab_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eeg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">montage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_minilab_bdf" title="Link to this definition"></a></dt>
+<dd><p>Reads BDF files with MiniLab-specific extensions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path to BDF file</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Data type, defaults to ‘eeg’</p></li>
+<li><p><strong>montage</strong> (<em>str</em><em>, </em><em>optional</em>) – Sensor montage information, defaults to ‘’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data dictionary with additional metadata</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_minilab_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_minilab_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fnirs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_minilab_snirf" title="Link to this definition"></a></dt>
+<dd><p>Reads SNIRF files with MiniLab-specific extensions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to SNIRF file, defaults to None</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Data type, defaults to ‘fnirs’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data dictionary with additional metadata</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_neuracle_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_neuracle_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_data_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_neuracle_bdf" title="Link to this definition"></a></dt>
+<dd><p>Reads Neuracle BDF data files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em> or </em><em>tuple</em><em>, </em><em>optional</em>) – Path to BDF file(s), defaults to None (opens dialog)</p></li>
+<li><p><strong>is_data_transform</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to transform data to standard format, defaults to True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded BDF data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – For invalid file formats or missing files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_nirs">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_nirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_nirs" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a .nirs file (NIRx format)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to .nirs file, defaults to None (opens dialog)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_npy">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_npy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_npy" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a NumPy .npy file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to .npy file, defaults to None (opens dialog)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded array</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_one_bids_file">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_one_bids_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_one_bids_file" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a list of BIDS file paths</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path_list</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – List of file paths in BIDS format</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of loaded data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If path_list is empty</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fnirs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_snirf" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a SNIRF file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to SNIRF file, defaults to None (opens dialog)</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Data type, defaults to ‘fnirs’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_txt">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_txt" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a text file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to text file, defaults to None (opens dialog)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.read_xlsx">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">read_xlsx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.read_xlsx" title="Link to this definition"></a></dt>
+<dd><p>Reads features from an Excel (.xlsx) file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Path to Excel file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Feature dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.reduce_dimensions">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">reduce_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.reduce_dimensions" title="Link to this definition"></a></dt>
+<dd><p>Reduces array dimensions by removing single-dimensional entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arr</strong> (<em>np.ndarray</em>) – Input array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reduced-dimension array</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray or scalar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.remove_keys">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">remove_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.remove_keys" title="Link to this definition"></a></dt>
+<dd><p>Removes dictionary keys containing a specific character</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>dict</em>) – Input dictionary</p></li>
+<li><p><strong>char</strong> (<em>str</em>) – Character to exclude from keys</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_csv">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_csv" title="Link to this definition"></a></dt>
+<dd><p>Saves data to a CSV file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Data to save</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Save path, defaults to None (opens dialog)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If data validation fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_feature">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_filestyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'csv'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_feature" title="Link to this definition"></a></dt>
+<dd><p>Saves feature data to a file in specified format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – Feature data (pandas DataFrame)</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to save file, defaults to None</p></li>
+<li><p><strong>save_filestyle</strong> (<em>str</em><em>, </em><em>optional</em>) – File format (‘csv’, ‘xlsx’, ‘tsv’, ‘mat’), defaults to ‘csv’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_file">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_filestyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_file" title="Link to this definition"></a></dt>
+<dd><p>Saves data to a file in specified format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Data to save</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to save file, defaults to None (opens dialog)</p></li>
+<li><p><strong>save_filestyle</strong> (<em>str</em><em>, </em><em>optional</em>) – File format (‘mat’, ‘csv’, ‘json’, ‘txt’), defaults to ‘mat’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_json">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_json" title="Link to this definition"></a></dt>
+<dd><p>Saves data to a JSON file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Data to save</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Save path, defaults to None (opens dialog)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If data validation fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_mat">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_mat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_mat" title="Link to this definition"></a></dt>
+<dd><p>Saves data to a MATLAB .mat file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Data to save</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Save path, defaults to None (opens dialog)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_metadata">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_metadata" title="Link to this definition"></a></dt>
+<dd><p>Saves metadata to a JSON file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Metadata to save</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Save path, defaults to None (opens dialog)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_npy">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_npy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_npy" title="Link to this definition"></a></dt>
+<dd><p>Saves data to a NumPy .npy file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>any</em>) – Data to save</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Save path, defaults to None (opens dialog)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_prepare">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_prepare" title="Link to this definition"></a></dt>
+<dd><p>Prepares data for saving by converting to lists and handling empty values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – Data to prepare</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Prepared data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.File_IO.save_txt">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.File_IO.</span></span><span class="sig-name descname"><span class="pre">save_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.File_IO.save_txt" title="Link to this definition"></a></dt>
+<dd><p>Saves data to a text file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Data to save</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Save path, defaults to None (opens dialog)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If data validation fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.io.readMinilabDataset">
+<span id="brainfusion-io-readminilabdataset-module"></span><h2>BrainFusion.io.readMinilabDataset module<a class="headerlink" href="#module-BrainFusion.io.readMinilabDataset" title="Link to this heading"></a></h2>
+<p>SNIRF and BDF File Processing Utilities</p>
+<p>Provides functions for reading, writing, and converting biomedical data files.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.add_event_to_minilab_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">add_event_to_minilab_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.add_event_to_minilab_bdf" title="Link to this definition"></a></dt>
+<dd><p>Add events to BDF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> (<em>dict</em>) – Data dictionary</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – Output file path</p></li>
+<li><p><strong>events</strong> (<em>list</em>) – Events to add</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.add_events_to_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">add_events_to_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_bdf_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_bdf_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.add_events_to_bdf" title="Link to this definition"></a></dt>
+<dd><p>Add events to BDF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_bdf_file</strong> (<em>str</em>) – Input BDF file</p></li>
+<li><p><strong>output_bdf_file</strong> (<em>str</em>) – Output BDF file</p></li>
+<li><p><strong>events_file</strong> (<em>str</em>) – Events Excel file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.add_events_to_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">add_events_to_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_snirf_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_snirf_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.add_events_to_snirf" title="Link to this definition"></a></dt>
+<dd><p>Add events to SNIRF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_snirf_file</strong> (<em>str</em>) – Input SNIRF file</p></li>
+<li><p><strong>output_snirf_file</strong> (<em>str</em>) – Output SNIRF file</p></li>
+<li><p><strong>events_file</strong> (<em>str</em>) – Events Excel file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.add_pos_to_minilab_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">add_pos_to_minilab_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_snirf_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_snirf_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.add_pos_to_minilab_snirf" title="Link to this definition"></a></dt>
+<dd><p>Add positions to SNIRF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_snirf_file</strong> (<em>str</em>) – Input SNIRF file</p></li>
+<li><p><strong>output_snirf_file</strong> (<em>str</em>) – Output SNIRF file</p></li>
+<li><p><strong>pos_file</strong> (<em>str</em>) – Position data file</p></li>
+<li><p><strong>events</strong> (<em>list</em>) – Events to add (optional)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.combine_data_and_evt">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">combine_data_and_evt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.combine_data_and_evt" title="Link to this definition"></a></dt>
+<dd><p>Combine BDF data and event files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_folder</strong> (<em>str</em>) – Input directory path</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – Output file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.load_events_from_excel">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">load_events_from_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.load_events_from_excel" title="Link to this definition"></a></dt>
+<dd><p>Load events from Excel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_path</strong> (<em>str</em>) – Excel file path</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of events</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.read_minilab_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">read_minilab_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eeg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">montage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.read_minilab_bdf" title="Link to this definition"></a></dt>
+<dd><p>Read MiniLab BDF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – BDF file path</p></li>
+<li><p><strong>signal_type</strong> (<em>str</em>) – Signal type (default ‘eeg’)</p></li>
+<li><p><strong>montage</strong> (<em>str</em>) – Electrode montage</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Parsed BDF data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.read_minilab_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">read_minilab_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fnirs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.read_minilab_snirf" title="Link to this definition"></a></dt>
+<dd><p>Read MiniLab SNIRF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – SNIRF file path</p></li>
+<li><p><strong>signal_type</strong> (<em>str</em>) – Signal type (default ‘fnirs’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Parsed SNIRF data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.save_events_to_excel">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">save_events_to_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">events</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.save_events_to_excel" title="Link to this definition"></a></dt>
+<dd><p>Save events to Excel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>events</strong> (<em>list</em>) – Events data</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>) – Output file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.save_events_to_excel_from_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">save_events_to_excel_from_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.save_events_to_excel_from_bdf" title="Link to this definition"></a></dt>
+<dd><p>Save BDF events to Excel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> (<em>str</em>) – BDF file path</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – Excel file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readMinilabDataset.save_events_to_excel_from_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readMinilabDataset.</span></span><span class="sig-name descname"><span class="pre">save_events_to_excel_from_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readMinilabDataset.save_events_to_excel_from_snirf" title="Link to this definition"></a></dt>
+<dd><p>Save SNIRF events to Excel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> (<em>str</em>) – SNIRF file path</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – Excel file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.io.readTUBerlinBCI">
+<span id="brainfusion-io-readtuberlinbci-module"></span><h2>BrainFusion.io.readTUBerlinBCI module<a class="headerlink" href="#module-BrainFusion.io.readTUBerlinBCI" title="Link to this heading"></a></h2>
+<p>SNIRF and BDF Conversion Utilities</p>
+<p>Provides functions for converting neuroscience datasets to various formats
+including BDF, SNIRF, and BrainFusion’s internal format.
+Compatible with Sphinx documentation generator.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.convert_dataset_to_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">convert_dataset_to_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.convert_dataset_to_bdf" title="Link to this definition"></a></dt>
+<dd><p>Convert entire TU Berlin dataset to BDF format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_root</strong> (<em>str</em>) – Root directory of dataset</p></li>
+<li><p><strong>output_root</strong> (<em>str</em>) – Output root directory</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.convert_dataset_to_brainfusion_eeg">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">convert_dataset_to_brainfusion_eeg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.convert_dataset_to_brainfusion_eeg" title="Link to this definition"></a></dt>
+<dd><p>Convert entire TU Berlin EEG dataset to BrainFusion format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_root</strong> (<em>str</em>) – Root directory of dataset</p></li>
+<li><p><strong>output_root</strong> (<em>str</em>) – Output root directory</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.convert_dataset_to_brainfusion_nirs">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">convert_dataset_to_brainfusion_nirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.convert_dataset_to_brainfusion_nirs" title="Link to this definition"></a></dt>
+<dd><p>Convert entire TU Berlin NIRS dataset to BrainFusion format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_root</strong> (<em>str</em>) – Root directory of dataset</p></li>
+<li><p><strong>output_root</strong> (<em>str</em>) – Output root directory</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.convert_dataset_to_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">convert_dataset_to_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.convert_dataset_to_snirf" title="Link to this definition"></a></dt>
+<dd><p>Convert entire TU Berlin dataset to SNIRF format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_root</strong> (<em>str</em>) – Root directory of dataset</p></li>
+<li><p><strong>output_root</strong> (<em>str</em>) – Output root directory</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_eeg_to_brainfusion">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">convert_tu_berlin_eeg_to_brainfusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_eeg_to_brainfusion" title="Link to this definition"></a></dt>
+<dd><p>Convert TU Berlin EEG dataset to BrainFusion format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_path</strong> (<em>str</em>) – Path to source data</p></li>
+<li><p><strong>output_folder</strong> (<em>str</em>) – Output folder</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_nirs_to_brainfusion">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">convert_tu_berlin_nirs_to_brainfusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_nirs_to_brainfusion" title="Link to this definition"></a></dt>
+<dd><p>Convert TU Berlin NIRS dataset to BrainFusion format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_path</strong> (<em>str</em>) – Path to source data</p></li>
+<li><p><strong>output_folder</strong> (<em>str</em>) – Output folder</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_to_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">convert_tu_berlin_to_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_to_bdf" title="Link to this definition"></a></dt>
+<dd><p>Convert TU Berlin data to BDF format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat_path</strong> (<em>str</em>) – MATLAB file path</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>) – Output BDF file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_to_snirf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">convert_tu_berlin_to_snirf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.convert_tu_berlin_to_snirf" title="Link to this definition"></a></dt>
+<dd><p>Convert TU Berlin dataset to SNIRF format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat_path</strong> (<em>str</em>) – Path to MATLAB file</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>) – Output SNIRF file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.filter_optode_positions">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">filter_optode_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.filter_optode_positions" title="Link to this definition"></a></dt>
+<dd><p>Filter invalid optode positions marked with ‘-’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Input data dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Data with filtered positions</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.generate_time_series">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">generate_time_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_rate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.generate_time_series" title="Link to this definition"></a></dt>
+<dd><p>Generate time vector for signals</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_samples</strong> (<em>int</em>) – Number of samples</p></li>
+<li><p><strong>sampling_rate</strong> (<em>float</em>) – Sampling frequency in Hz</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Time vector in seconds</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.interleave_channels">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">interleave_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.interleave_channels" title="Link to this definition"></a></dt>
+<dd><p>Interleave fNIRS channel data by wavelength</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Input data dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Data with interleaved channels</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.read_tu_berlin_bci_eeg_data">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">read_tu_berlin_bci_eeg_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.read_tu_berlin_bci_eeg_data" title="Link to this definition"></a></dt>
+<dd><p>Load TU Berlin BCI EEG dataset subject folder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>folder_path</strong> (<em>str</em>) – Path to subject folder</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>EEG data organized in dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.read_tu_berlin_bci_nirs_data">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">read_tu_berlin_bci_nirs_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.read_tu_berlin_bci_nirs_data" title="Link to this definition"></a></dt>
+<dd><p>Load TU Berlin BCI NIRS dataset subject folder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>folder_path</strong> (<em>str</em>) – Path to subject folder</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>NIRS data organized in dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.readTUBerlinBCI.remove_dtype">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.readTUBerlinBCI.</span></span><span class="sig-name descname"><span class="pre">remove_dtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.readTUBerlinBCI.remove_dtype" title="Link to this definition"></a></dt>
+<dd><p>Convert NumPy arrays to Python lists for serialization</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Input value to process</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value with arrays converted to lists</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list or original type</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.io.snirf_io">
+<span id="brainfusion-io-snirf-io-module"></span><h2>BrainFusion.io.snirf_io module<a class="headerlink" href="#module-BrainFusion.io.snirf_io" title="Link to this heading"></a></h2>
+<p>SNIRF File Utilities</p>
+<p>Provides functions for creating and reading SNIRF files in HDF5 format.
+Compatible with Sphinx documentation generator.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.snirf_io.create_snirf_file">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.snirf_io.</span></span><span class="sig-name descname"><span class="pre">create_snirf_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1.0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_time_series</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_lists</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_pos_3d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_pos_3d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelengths_emission</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_pos_2d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_pos_2d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_delays</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_delay_widths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moment_orders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlation_time_delays</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlation_time_delay_widths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">landmark_pos_2d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">landmark_pos_3d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">landmark_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinate_system</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinate_system_description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_local_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stim_lists</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.snirf_io.create_snirf_file" title="Link to this definition"></a></dt>
+<dd><p>Create a SNIRF-compliant HDF5 file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Output HDF5 file path</p></li>
+<li><p><strong>format_version</strong> (<em>str</em><em>, </em><em>optional</em>) – SNIRF format version</p></li>
+<li><p><strong>metadata</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of metadata tags</p></li>
+<li><p><strong>data_time_series</strong> (<em>numpy.ndarray</em>) – Time-series data array</p></li>
+<li><p><strong>time_points</strong> (<em>numpy.ndarray</em>) – Time vector corresponding to data</p></li>
+<li><p><strong>measurement_lists</strong> (<em>list</em><em>, </em><em>optional</em>) – List of measurement list dictionaries</p></li>
+<li><p><strong>source_pos_3d</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – 3D positions of light sources</p></li>
+<li><p><strong>detector_pos_3d</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – 3D positions of detectors</p></li>
+<li><p><strong>wavelengths</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – Light wavelengths for measurement</p></li>
+<li><p><strong>wavelengths_emission</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – Emission wavelengths</p></li>
+<li><p><strong>source_pos_2d</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – 2D positions of light sources</p></li>
+<li><p><strong>detector_pos_2d</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – 2D positions of detectors</p></li>
+<li><p><strong>frequencies</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – Frequency modulation values</p></li>
+<li><p><strong>time_delays</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – Time delay values</p></li>
+<li><p><strong>time_delay_widths</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – Time delay distribution widths</p></li>
+<li><p><strong>moment_orders</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – Moment orders for analysis</p></li>
+<li><p><strong>correlation_time_delays</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – Correlation time delays</p></li>
+<li><p><strong>correlation_time_delay_widths</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – Correlation time delay widths</p></li>
+<li><p><strong>source_labels</strong> (<em>list</em><em>, </em><em>optional</em>) – Source identification labels</p></li>
+<li><p><strong>detector_labels</strong> (<em>list</em><em>, </em><em>optional</em>) – Detector identification labels</p></li>
+<li><p><strong>landmark_pos_2d</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – 2D landmark positions</p></li>
+<li><p><strong>landmark_pos_3d</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – 3D landmark positions</p></li>
+<li><p><strong>landmark_labels</strong> (<em>list</em><em>, </em><em>optional</em>) – Landmark identification labels</p></li>
+<li><p><strong>coordinate_system</strong> (<em>str</em><em>, </em><em>optional</em>) – Coordinate system identifier</p></li>
+<li><p><strong>coordinate_system_description</strong> (<em>str</em><em>, </em><em>optional</em>) – Coordinate system description</p></li>
+<li><p><strong>use_local_index</strong> (<em>int</em><em>, </em><em>optional</em>) – Flag for using local indexing (0 or 1)</p></li>
+<li><p><strong>stim_lists</strong> (<em>list</em><em>, </em><em>optional</em>) – List of stimulation dictionaries</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.snirf_io.read_snirf_file">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.snirf_io.</span></span><span class="sig-name descname"><span class="pre">read_snirf_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.snirf_io.read_snirf_file" title="Link to this definition"></a></dt>
+<dd><p>Read and parse a SNIRF file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Path to SNIRF file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Structured dictionary containing file contents</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.io">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-BrainFusion.io" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="BrainFusion documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="BrainFusion.io.neuracle_lib.html" class="btn btn-neutral float-right" title="BrainFusion.io.neuracle_lib package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, mini-lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

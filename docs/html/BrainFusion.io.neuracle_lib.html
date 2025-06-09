@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrainFusion.io.neuracle_lib package &mdash; BrainFusion v0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=fa47ad08"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="BrainFusion.pipeLine package" href="BrainFusion.pipeLine.html" />
+    <link rel="prev" title="BrainFusion.io package" href="BrainFusion.io.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BrainFusion
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="BrainFusion.io.html">BrainFusion.io package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="BrainFusion.io.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">BrainFusion.io.neuracle_lib package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-BrainFusion.io.neuracle_lib.dataServer">BrainFusion.io.neuracle_lib.dataServer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-BrainFusion.io.neuracle_lib.readbdfdata">BrainFusion.io.neuracle_lib.readbdfdata module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-BrainFusion.io.neuracle_lib.triggerBox">BrainFusion.io.neuracle_lib.triggerBox module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-BrainFusion.io.neuracle_lib">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.html#module-BrainFusion.io.File_IO">BrainFusion.io.File_IO module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.html#module-BrainFusion.io.readMinilabDataset">BrainFusion.io.readMinilabDataset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.html#module-BrainFusion.io.readTUBerlinBCI">BrainFusion.io.readTUBerlinBCI module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.html#module-BrainFusion.io.snirf_io">BrainFusion.io.snirf_io module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BrainFusion.io.html#module-BrainFusion.io">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.pipeLine.html">BrainFusion.pipeLine package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.utils.html">BrainFusion.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.statistic.html">BrainFusion.statistic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BrainFusion.viewer.html">BrainFusion.viewer package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BrainFusion</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="BrainFusion.io.html">BrainFusion.io package</a></li>
+      <li class="breadcrumb-item active">BrainFusion.io.neuracle_lib package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/BrainFusion.io.neuracle_lib.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="brainfusion-io-neuracle-lib-package">
+<h1>BrainFusion.io.neuracle_lib package<a class="headerlink" href="#brainfusion-io-neuracle-lib-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-BrainFusion.io.neuracle_lib.dataServer">
+<span id="brainfusion-io-neuracle-lib-dataserver-module"></span><h2>BrainFusion.io.neuracle_lib.dataServer module<a class="headerlink" href="#module-BrainFusion.io.neuracle_lib.dataServer" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.dataServer.</span></span><span class="sig-name descname"><span class="pre">DataServerThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">My_EEG_Data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_buffer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.GetBufferData">
+<span class="sig-name descname"><span class="pre">GetBufferData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.GetBufferData" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.GetDataLenCount">
+<span class="sig-name descname"><span class="pre">GetDataLenCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.GetDataLenCount" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.ResetDataLenCount">
+<span class="sig-name descname"><span class="pre">ResetDataLenCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.ResetDataLenCount" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.ResetTriggerChanofBuff">
+<span class="sig-name descname"><span class="pre">ResetTriggerChanofBuff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.ResetTriggerChanofBuff" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.connect">
+<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8712</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.connect" title="Link to this definition"></a></dt>
+<dd><p>try to connect data server</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.parseData">
+<span class="sig-name descname"><span class="pre">parseData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.parseData" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.read_thread">
+<span class="sig-name descname"><span class="pre">read_thread</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.read_thread" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.run" title="Link to this definition"></a></dt>
+<dd><p>Method representing the thread’s activity.</p>
+<p>You may override this method in a subclass. The standard run() method
+invokes the callable object passed to the object’s constructor as the
+target argument, if any, with sequential and keyword arguments taken
+from the args and kwargs arguments, respectively.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.sock">
+<span class="sig-name descname"><span class="pre">sock</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.sock" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.DataServerThread.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.DataServerThread.stop" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.RingBuffer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.dataServer.</span></span><span class="sig-name descname"><span class="pre">RingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_points</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.RingBuffer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.RingBuffer.appendBuffer">
+<span class="sig-name descname"><span class="pre">appendBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.RingBuffer.appendBuffer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.RingBuffer.getData">
+<span class="sig-name descname"><span class="pre">getData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.RingBuffer.getData" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.dataServer.RingBuffer.resetBuffer">
+<span class="sig-name descname"><span class="pre">resetBuffer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.dataServer.RingBuffer.resetBuffer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.io.neuracle_lib.readbdfdata">
+<span id="brainfusion-io-neuracle-lib-readbdfdata-module"></span><h2>BrainFusion.io.neuracle_lib.readbdfdata module<a class="headerlink" href="#module-BrainFusion.io.neuracle_lib.readbdfdata" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.readbdfdata.read_annotations_bdf">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.readbdfdata.</span></span><span class="sig-name descname"><span class="pre">read_annotations_bdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">annotations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.readbdfdata.read_annotations_bdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.readbdfdata.readbdfdata">
+<span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.readbdfdata.</span></span><span class="sig-name descname"><span class="pre">readbdfdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.readbdfdata.readbdfdata" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>list</em><em> of </em><em>str</em>)</p></li>
+<li><p><strong>pathname</strong> (<em>list</em><em> of </em><em>str</em>)</p></li>
+<li><p><strong>Return</strong></p></li>
+<li><p><strong>----------</strong></p></li>
+<li><p><strong>dictionary</strong> (<em>eeg</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.io.neuracle_lib.triggerBox">
+<span id="brainfusion-io-neuracle-lib-triggerbox-module"></span><h2>BrainFusion.io.neuracle_lib.triggerBox module<a class="headerlink" href="#module-BrainFusion.io.neuracle_lib.triggerBox" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.triggerBox.</span></span><span class="sig-name descname"><span class="pre">PackageGetDeviceInfo</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo.command">
+<span class="sig-name descname"><span class="pre">command</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo.command" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo.frame">
+<span class="sig-name descname"><span class="pre">frame</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageGetDeviceInfo.frame" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.triggerBox.</span></span><span class="sig-name descname"><span class="pre">PackageGetSensorPara</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara.frame">
+<span class="sig-name descname"><span class="pre">frame</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara.frame" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara.sensorInfo">
+<span class="sig-name descname"><span class="pre">sensorInfo</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageGetSensorPara.sensorInfo" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.triggerBox.</span></span><span class="sig-name descname"><span class="pre">PackageSensorInfo</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo.sensorNum">
+<span class="sig-name descname"><span class="pre">sensorNum</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo.sensorNum" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo.sensorType">
+<span class="sig-name descname"><span class="pre">sensorType</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorInfo.sensorType" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.triggerBox.</span></span><span class="sig-name descname"><span class="pre">PackageSensorPara</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.Edge">
+<span class="sig-name descname"><span class="pre">Edge</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.Edge" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.EventData">
+<span class="sig-name descname"><span class="pre">EventData</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.EventData" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.OutputChannel">
+<span class="sig-name descname"><span class="pre">OutputChannel</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.OutputChannel" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.Threshold">
+<span class="sig-name descname"><span class="pre">Threshold</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.Threshold" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.TriggerToBeOut">
+<span class="sig-name descname"><span class="pre">TriggerToBeOut</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSensorPara.TriggerToBeOut" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.triggerBox.</span></span><span class="sig-name descname"><span class="pre">PackageSetSensorPara</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.frame">
+<span class="sig-name descname"><span class="pre">frame</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.frame" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.sensorInfo">
+<span class="sig-name descname"><span class="pre">sensorInfo</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.sensorInfo" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.sensorPara">
+<span class="sig-name descname"><span class="pre">sensorPara</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageSetSensorPara.sensorPara" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.triggerBox.</span></span><span class="sig-name descname"><span class="pre">PackageTriggerBoxBaseFrame</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.deviceID">
+<span class="sig-name descname"><span class="pre">deviceID</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.deviceID" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.functionID">
+<span class="sig-name descname"><span class="pre">functionID</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.functionID" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.payload">
+<span class="sig-name descname"><span class="pre">payload</span></span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.PackageTriggerBoxBaseFrame.payload" title="Link to this definition"></a></dt>
+<dd><p>Structure/Union member</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BrainFusion.io.neuracle_lib.triggerBox.</span></span><span class="sig-name descname"><span class="pre">TriggerBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serial_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.check_online">
+<span class="sig-name descname"><span class="pre">check_online</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.check_online" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.closeSerial">
+<span class="sig-name descname"><span class="pre">closeSerial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.closeSerial" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDDeviceInfoGet">
+<span class="sig-name descname"><span class="pre">functionIDDeviceInfoGet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDDeviceInfoGet" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDDeviceNameGet">
+<span class="sig-name descname"><span class="pre">functionIDDeviceNameGet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDDeviceNameGet" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDError">
+<span class="sig-name descname"><span class="pre">functionIDError</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">131</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDError" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDOutputEventData">
+<span class="sig-name descname"><span class="pre">functionIDOutputEventData</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">225</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDOutputEventData" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorInfoGet">
+<span class="sig-name descname"><span class="pre">functionIDSensorInfoGet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorInfoGet" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorParaGet">
+<span class="sig-name descname"><span class="pre">functionIDSensorParaGet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorParaGet" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorParaSet">
+<span class="sig-name descname"><span class="pre">functionIDSensorParaSet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorParaSet" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorSampleGet">
+<span class="sig-name descname"><span class="pre">functionIDSensorSampleGet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.functionIDSensorSampleGet" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_device_info">
+<span class="sig-name descname"><span class="pre">get_device_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_device_info" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_device_name">
+<span class="sig-name descname"><span class="pre">get_device_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_device_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_info">
+<span class="sig-name descname"><span class="pre">get_sensor_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_info" title="Link to this definition"></a></dt>
+<dd><p>a little strange:
+SensorType :           Light, SensorNum: 1
+SensorType :           Light, SensorNum: 2    &lt;—- Why have 2 sensorType?
+SensorType :          LineIN, SensorNum: 1
+SensorType :          LineIN, SensorNum: 2
+SensorType :    Ambientlight, SensorNum: 1
+SensorType :             Mic, SensorNum: 1
+SensorType :        Humidity, SensorNum: 1
+SensorType :     Temperature, SensorNum: 1
+SensorType :           Debug, SensorNum: 1
+SensorType :       Undefined, SensorNum: 0
+SensorType :       Undefined, SensorNum: 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_para">
+<span class="sig-name descname"><span class="pre">get_sensor_para</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensorID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_para" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_sample">
+<span class="sig-name descname"><span class="pre">get_sensor_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensorID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.get_sensor_sample" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.init_audioSensor">
+<span class="sig-name descname"><span class="pre">init_audioSensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensorID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.init_audioSensor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.init_lightSensor">
+<span class="sig-name descname"><span class="pre">init_lightSensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensorID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.init_lightSensor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.output_event_data">
+<span class="sig-name descname"><span class="pre">output_event_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eventData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triggerToBeOut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.output_event_data" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eventData</strong></p></li>
+<li><p><strong>triggerToBeOut</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">functionID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.read" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.refresh_serial_list">
+<span class="sig-name descname"><span class="pre">refresh_serial_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.refresh_serial_list" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.send" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeAll">
+<span class="sig-name descname"><span class="pre">sensorTypeAll</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">255</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeAll" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeAmbientlight">
+<span class="sig-name descname"><span class="pre">sensorTypeAmbientlight</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeAmbientlight" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeDebug">
+<span class="sig-name descname"><span class="pre">sensorTypeDebug</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeDebug" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeDigitalIN">
+<span class="sig-name descname"><span class="pre">sensorTypeDigitalIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeDigitalIN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeHumidity">
+<span class="sig-name descname"><span class="pre">sensorTypeHumidity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeHumidity" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeKey">
+<span class="sig-name descname"><span class="pre">sensorTypeKey</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeKey" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeLight">
+<span class="sig-name descname"><span class="pre">sensorTypeLight</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeLight" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeLineIN">
+<span class="sig-name descname"><span class="pre">sensorTypeLineIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeLineIN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeMap">
+<span class="sig-name descname"><span class="pre">sensorTypeMap</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{1:</span> <span class="pre">'DigitalIN',</span> <span class="pre">2:</span> <span class="pre">'Light',</span> <span class="pre">3:</span> <span class="pre">'LineIN',</span> <span class="pre">4:</span> <span class="pre">'Mic',</span> <span class="pre">5:</span> <span class="pre">'Key',</span> <span class="pre">6:</span> <span class="pre">'Temperature',</span> <span class="pre">7:</span> <span class="pre">'Humidity',</span> <span class="pre">8:</span> <span class="pre">'Ambientlight',</span> <span class="pre">9:</span> <span class="pre">'Debug'}</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeMap" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeMic">
+<span class="sig-name descname"><span class="pre">sensorTypeMic</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeMic" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeTemperature">
+<span class="sig-name descname"><span class="pre">sensorTypeTemperature</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.sensorTypeTemperature" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_audioSensor_threshold">
+<span class="sig-name descname"><span class="pre">set_audioSensor_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensorID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_audioSensor_threshold" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_event_data">
+<span class="sig-name descname"><span class="pre">set_event_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensorID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eventData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triggerTOBeOut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_event_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_lightSensor_threshold">
+<span class="sig-name descname"><span class="pre">set_lightSensor_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensorID</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_lightSensor_threshold" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_sensor_para">
+<span class="sig-name descname"><span class="pre">set_sensor_para</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensorID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensorPara</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.set_sensor_para" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.validate_device">
+<span class="sig-name descname"><span class="pre">validate_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#BrainFusion.io.neuracle_lib.triggerBox.TriggerBox.validate_device" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-BrainFusion.io.neuracle_lib">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-BrainFusion.io.neuracle_lib" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="BrainFusion.io.html" class="btn btn-neutral float-left" title="BrainFusion.io package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="BrainFusion.pipeLine.html" class="btn btn-neutral float-right" title="BrainFusion.pipeLine package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, mini-lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
